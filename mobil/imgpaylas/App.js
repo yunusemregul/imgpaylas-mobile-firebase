@@ -5,7 +5,8 @@ import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } fr
 export default function App() {
   return (
     <View style={styles.container}>
-      <Image source={require('./assets/images/logo.png')}/>
+      <Image source={require('./assets/images/logo.png')}
+      style={{width: 214, height: 64}}/>
       <Text style={{
         fontSize: 25,
         color: '#39375B',
@@ -13,13 +14,13 @@ export default function App() {
       }}>Üye Girişi</Text>
       <TextInput autoCompleteType='email' style={styles.textinput} placeholder='E-posta' placeholderTextColor='#39375B'/>
       <TextInput autoCompleteType='password' secureTextEntry={true} style={styles.textinput} placeholder='Şifre' placeholderTextColor='#39375B'/>
-      <TouchableOpacity title='Giriş' style={styles.loginbutton}>
+      <TouchableOpacity title='Giriş' style={styles.loginbutton} activeOpacity={1}>
         <Text style={{color:'#fff', fontSize: 17}}>
           Giriş
         </Text>
       </TouchableOpacity>
       <Text style={{marginTop:14, fontSize:17, color:'#39375B'}}>ya da</Text>
-      <TouchableOpacity title='Kayıt Ol' style={styles.registerbutton}>
+      <TouchableOpacity title='Kayıt Ol' style={styles.registerbutton} activeOpacity={1}>
         <Text style={{color:'#fff', fontSize: 17}}>
           Kayıt Ol
         </Text>
