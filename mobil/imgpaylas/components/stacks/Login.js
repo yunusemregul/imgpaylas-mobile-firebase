@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 export default class Login extends Component {
   constructor(props) {
@@ -88,7 +87,6 @@ export default class Login extends Component {
         >
           <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
         </TouchableOpacity>
-        <StatusBar style="auto" />
       </View>
     );
   }
