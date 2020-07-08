@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import auth from "@react-native-firebase/auth";
 
 export default class Register extends Component {
   constructor(props) {
@@ -13,7 +14,20 @@ export default class Register extends Component {
     this.register.bind(this);
   }
 
-  register() {}
+  register() {
+    auth()
+      .signInAnonymously()
+      .then(() => {
+        console.log("User signed in anonymously");
+      })
+      .catch((error) => {
+        if (error.code === "auth/operation-not-allowed") {
+          console.log("Enable anonymous in your firebase console.");
+        }
+
+        console.error(error);
+      });
+  }
 
   render() {
     return (
