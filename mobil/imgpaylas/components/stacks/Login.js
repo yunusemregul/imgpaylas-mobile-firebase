@@ -21,10 +21,10 @@ export default class Login extends Component {
   }
 
   register() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     console.log("register called");
     navigation.navigate("Register");
-    navigation.navigate
+    navigation.navigate;
   }
 
   render() {
@@ -82,7 +82,9 @@ export default class Login extends Component {
           title="Kayıt Ol"
           style={styles.registerbutton}
           activeOpacity={1}
-          onPress={() => {this.register()}}
+          onPress={() => {
+            this.register();
+          }}
         >
           <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
         </TouchableOpacity>
