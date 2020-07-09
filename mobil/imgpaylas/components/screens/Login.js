@@ -14,17 +14,24 @@ export default function Login({ navigation, screenName }) {
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
         console.log("User with email '" + email + "' logged in!");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
+        });
       })
       .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          console.log("That email address is already in use!");
+        console.log(error);
+        console.log(error.code);
+        if(error.code=="auth/invalid-email")
+        {
+          console.log("this does not print");
+        }
+        if(error.code=="auth/ınvalıd-emaıl")
+        {
+          console.log("this prints");
         }
 
-        if (error.code === "auth/invalid-email") {
-          console.log("That email address is invalid!");
-        }
-
-        console.error(error);
+        //console.error(error);
       });
   }
 

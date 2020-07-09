@@ -29,7 +29,7 @@ export default function App() {
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
-    if(user!=null)
+    if (user != null)
       console.log("user with email '" + user.email + "' logged in!");
     if (initializing) setInitializing(false);
   }

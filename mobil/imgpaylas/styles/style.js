@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 const colors = {
   primary: "#7D7D7D",
-  important: "#FFCC5C",
+  important: "#FFC72E",
   negative: "#FF6F69",
-  positive: "#88D8B0",
+  positive: "#42D28A",
   background: "#F3F4F5",
   white: "#FFFFFF",
 };

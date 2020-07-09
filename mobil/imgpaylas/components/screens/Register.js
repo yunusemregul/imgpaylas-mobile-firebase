@@ -20,7 +20,10 @@ export default function Register({ navigation, screenName }) {
               displayName: name,
             })
             .then((s) => {
-              navigation.navigate("Home");
+              navigation.reset({
+                index: 0,
+                routes: [{name: "Home"}]
+              });
             });
         }
       })
