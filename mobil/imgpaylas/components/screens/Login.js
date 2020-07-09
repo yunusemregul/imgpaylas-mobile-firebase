@@ -1,18 +1,31 @@
-import React from "react";
-import {
-  Image,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import React, {useState} from "react";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
+import auth from "@react-native-firebase/auth";
 
-export default function Login({navigation, screenName}) {
+export default function Login({ navigation, screenName }) {
   let passwordInput;
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
   function logIn() {
     console.log("login called");
+    auth()
+      .signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        console.log("User with email '" + email + "' logged in!");
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          console.log("That email address is already in use!");
+        }
+
+        if (error.code === "auth/invalid-email") {
+          console.log("That email address is invalid!");
+        }
+
+        console.error(error);
+      });
   }
 
   function register() {
@@ -39,6 +52,9 @@ export default function Login({navigation, screenName}) {
         autoCompleteType="email"
         style={styles.textinput}
         placeholder="E-posta"
+        onChangeText={(text) => {
+          setEmail(text);
+        }}
         placeholderTextColor="#39375B"
         onSubmitEditing={() => {
           passwordInput.focus();
@@ -51,6 +67,9 @@ export default function Login({navigation, screenName}) {
         autoCompleteType="password"
         secureTextEntry={true}
         style={styles.textinput}
+        onChangeText={(text) => {
+          setPass(text);
+        }}
         placeholder="Şifre"
         placeholderTextColor="#39375B"
         onSubmitEditing={() => {

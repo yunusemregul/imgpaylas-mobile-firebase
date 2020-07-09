@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
 import auth from "@react-native-firebase/auth";
+import React, { useState } from "react";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
 
-export default function Register() {
-  const [mail, setEmail] = useState("");
+export default function Register({ navigation, screenName }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   let emailInput, passwordInput, passwordAgainInput;
@@ -18,8 +13,16 @@ export default function Register() {
   function register() {
     auth()
       .createUserWithEmailAndPassword(email, pass)
-      .then(() => {
-        console.log("User account created & signed in!");
+      .then((userCredentials) => {
+        if (userCredentials.user) {
+          userCredentials.user
+            .updateProfile({
+              displayName: name,
+            })
+            .then((s) => {
+              navigation.navigate("Home");
+            });
+        }
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -48,6 +51,7 @@ export default function Register() {
         style={styles.textinput}
         placeholder="Ad"
         placeholderTextColor="#39375B"
+        onChangeText={(text) => setName(text)}
         onSubmitEditing={() => {
           emailInput.focus();
         }}
