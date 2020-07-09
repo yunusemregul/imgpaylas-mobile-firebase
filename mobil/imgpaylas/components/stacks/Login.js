@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
     width: 245,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 32,
+    borderRadius: 2,
     height: 40,
   },
   registerbutton: {
@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
     width: 245,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 32,
+    borderRadius: 2,
     height: 40,
   },
 });

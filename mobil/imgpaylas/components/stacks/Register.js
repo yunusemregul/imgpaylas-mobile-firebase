@@ -12,17 +12,25 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
     this.register.bind(this);
+    this.state = {
+      email: "",
+      password: "",
+    };
   }
 
   register() {
     auth()
-      .signInAnonymously()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        console.log("User signed in anonymously");
+        console.log("User account created & signed in!");
       })
       .catch((error) => {
-        if (error.code === "auth/operation-not-allowed") {
-          console.log("Enable anonymous in your firebase console.");
+        if (error.code === "auth/email-already-in-use") {
+          console.log("That email address is already in use!");
+        }
+
+        if (error.code === "auth/invalid-email") {
+          console.log("That email address is invalid!");
         }
 
         console.error(error);
@@ -41,7 +49,6 @@ export default class Register extends Component {
           Üye Kaydı
         </Text>
         <TextInput
-          autoCompleteType="email"
           style={styles.textinput}
           placeholder="Ad"
           placeholderTextColor="#39375B"
@@ -53,6 +60,7 @@ export default class Register extends Component {
           ref={(input) => {
             this.emailInput = input;
           }}
+          onChangeText={(text) => this.setState({ email: text })}
           autoCompleteType="email"
           style={styles.textinput}
           placeholder="E-posta"
@@ -65,6 +73,7 @@ export default class Register extends Component {
           ref={(input) => {
             this.passwordInput = input;
           }}
+          onChangeText={(text) => this.setState({ password: text })}
           autoCompleteType="password"
           secureTextEntry={true}
           style={styles.textinput}
@@ -128,7 +137,7 @@ export const styles = StyleSheet.create({
     width: 245,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 32,
+    borderRadius: 2,
     height: 40,
   },
   registerbutton: {
@@ -138,7 +147,7 @@ export const styles = StyleSheet.create({
     width: 245,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 32,
+    borderRadius: 2,
     height: 40,
   },
 });
