@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -8,19 +8,15 @@ import {
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 
-export default class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.register.bind(this);
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+export default function Register() {
+  const [mail, setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
-  register() {
+  let emailInput, passwordInput, passwordAgainInput;
+
+  function register() {
     auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .createUserWithEmailAndPassword(email, pass)
       .then(() => {
         console.log("User account created & signed in!");
       })
@@ -37,78 +33,76 @@ export default class Register extends Component {
       });
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text
-          style={{
-            fontSize: 25,
-            color: "#39375B",
-          }}
-        >
-          Üye Kaydı
-        </Text>
-        <TextInput
-          style={styles.textinput}
-          placeholder="Ad"
-          placeholderTextColor="#39375B"
-          onSubmitEditing={() => {
-            this.emailInput.focus();
-          }}
-        />
-        <TextInput
-          ref={(input) => {
-            this.emailInput = input;
-          }}
-          onChangeText={(text) => this.setState({ email: text })}
-          autoCompleteType="email"
-          style={styles.textinput}
-          placeholder="E-posta"
-          placeholderTextColor="#39375B"
-          onSubmitEditing={() => {
-            this.passwordInput.focus();
-          }}
-        />
-        <TextInput
-          ref={(input) => {
-            this.passwordInput = input;
-          }}
-          onChangeText={(text) => this.setState({ password: text })}
-          autoCompleteType="password"
-          secureTextEntry={true}
-          style={styles.textinput}
-          placeholder="Şifre"
-          placeholderTextColor="#39375B"
-          onSubmitEditing={() => {
-            this.passwordAgainInput.focus();
-          }}
-        />
-        <TextInput
-          ref={(input) => {
-            this.passwordAgainInput = input;
-          }}
-          autoCompleteType="password"
-          secureTextEntry={true}
-          style={styles.textinput}
-          placeholder="Şifre Tekrarı"
-          placeholderTextColor="#39375B"
-          onSubmitEditing={() => {
-            this.register();
-          }}
-        />
-        <TouchableOpacity
-          title="Kayıt Ol"
-          style={styles.registerbutton}
-          activeOpacity={1}
-          onPress={() => {
-            this.register();
-          }}
-        >
-          <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text
+        style={{
+          fontSize: 25,
+          color: "#39375B",
+        }}
+      >
+        Üye Kaydı
+      </Text>
+      <TextInput
+        style={styles.textinput}
+        placeholder="Ad"
+        placeholderTextColor="#39375B"
+        onSubmitEditing={() => {
+          emailInput.focus();
+        }}
+      />
+      <TextInput
+        ref={(input) => {
+          emailInput = input;
+        }}
+        onChangeText={(text) => setEmail(text)}
+        autoCompleteType="email"
+        style={styles.textinput}
+        placeholder="E-posta"
+        placeholderTextColor="#39375B"
+        onSubmitEditing={() => {
+          passwordInput.focus();
+        }}
+      />
+      <TextInput
+        ref={(input) => {
+          passwordInput = input;
+        }}
+        onChangeText={(text) => setPass(text)}
+        autoCompleteType="password"
+        secureTextEntry={true}
+        style={styles.textinput}
+        placeholder="Şifre"
+        placeholderTextColor="#39375B"
+        onSubmitEditing={() => {
+          passwordAgainInput.focus();
+        }}
+      />
+      <TextInput
+        ref={(input) => {
+          passwordAgainInput = input;
+        }}
+        autoCompleteType="password"
+        secureTextEntry={true}
+        style={styles.textinput}
+        placeholder="Şifre Tekrarı"
+        placeholderTextColor="#39375B"
+        onSubmitEditing={() => {
+          register();
+        }}
+      />
+      <TouchableOpacity
+        title="Kayıt Ol"
+        style={styles.registerbutton}
+        activeOpacity={1}
+        onPress={() => {
+          register();
+        }}
+      >
+        <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 // TODO: style ları ortak bir yerden al
