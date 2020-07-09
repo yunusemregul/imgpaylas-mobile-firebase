@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Image,
   Text,
   View,
   TextInput,
-  TouchableOpacity,
-  StyleSheet,
+  TouchableOpacity
 } from "react-native";
+import styles from "../../styles/style";
 
 export default function Login({navigation, screenName}) {
   let passwordInput;
@@ -18,7 +18,6 @@ export default function Login({navigation, screenName}) {
   function register() {
     console.log("register called");
     navigation.navigate("Register");
-    navigation.navigate;
   }
 
   return (
@@ -84,43 +83,3 @@ export default function Login({navigation, screenName}) {
     </View>
   );
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F3F4F5",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textinput: {
-    marginTop: 14,
-    color: "#39375B",
-    fontSize: 17,
-    borderColor: "#39375B",
-    width: 245,
-    height: 40,
-    borderWidth: 2,
-    padding: 10,
-    borderRadius: 2,
-  },
-  loginbutton: {
-    padding: 8,
-    backgroundColor: "#39375B",
-    marginTop: 32,
-    width: 245,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-  },
-  registerbutton: {
-    padding: 8,
-    backgroundColor: "#E76F51",
-    marginTop: 14,
-    width: 245,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-  },
-});
