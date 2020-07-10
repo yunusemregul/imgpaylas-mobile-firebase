@@ -62,7 +62,6 @@ export default function App() {
   const [user, setUser] = useState();
   const [initializing, setInitializing] = useState(true);
 
-  // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
     if (user != null)
@@ -72,7 +71,7 @@ export default function App() {
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    return subscriber;
   }, []);
 
   if (initializing) return null;
