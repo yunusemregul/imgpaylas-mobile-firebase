@@ -18,17 +18,38 @@ function TabNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          // TODO: DYNAMIC ICON
+          let routeName = route.name.toLowerCase();
+          let icon;
 
-          return (
-            <Image
-              source={require(icon)}
-              style={{ width: 36, height: 36 }}
-            />
-          );
+          /* 
+            Böyle yapılması gerekmesi çok kötü
+            https://reactnative.dev/docs/images
+          */
+          switch (routeName) {
+            case "home": {
+              icon = focused
+                ? require("./assets/images/icon_home_focused.png")
+                : require("./assets/images/icon_home.png");
+              break;
+            }
+            case "likes": {
+              icon = focused
+                ? require("./assets/images/icon_likes_focused.png")
+                : require("./assets/images/icon_likes.png");
+              break;
+            }
+            case "uploads": {
+              icon = focused
+                ? require("./assets/images/icon_uploads_focused.png")
+                : require("./assets/images/icon_uploads.png");
+              break;
+            }
+          }
+
+          return <Image source={icon} style={{ width: 36, height: 36 }} />;
         },
       })}
-      tabBarOptions={{ showLabel: false}}
+      tabBarOptions={{ showLabel: false }}
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Likes" component={Likes} />
