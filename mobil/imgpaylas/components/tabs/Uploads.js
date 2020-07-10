@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import storage from "@react-native-firebase/storage";
 import style from "../../styles/style";
 import ImagePicker from "react-native-image-picker";
+import { utils } from "@react-native-firebase/app";
+import storage from "@react-native-firebase/storage";
+import auth from "@react-native-firebase/auth";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -16,9 +18,15 @@ const imagePickerOptions = {
 };
 
 export default function Uploads() {
-  function upload() {
-    ImagePicker.showImagePicker(imagePickerOptions, (response) => {
+  async function upload() {
+    ImagePicker.showImagePicker(imagePickerOptions, async (response) => {
       console.log(response);
+      const reference = storage().ref(
+        "user/" + auth().currentUser.uid + "/" + response.fileName
+      );
+      const pathToFile =
+        `${utils.FilePath.PICTURES_DIRECTORY}/images/` + response.fileName;
+      await reference.putFile(pathToFile);
     });
   }
 
