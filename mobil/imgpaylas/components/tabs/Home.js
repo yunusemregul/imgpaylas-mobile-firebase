@@ -5,7 +5,8 @@ import style from "../../styles/style";
 
 export default function Home() {
   return (
-    <View style={style.container}>
+    <View>
+      <Text style={style.tabtitle}>Keşfet</Text>
       <Text>Hoş geldin {auth().currentUser.displayName}!</Text>
     </View>
   );

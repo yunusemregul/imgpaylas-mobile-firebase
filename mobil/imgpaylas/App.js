@@ -4,11 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
-import Home from "./components/screens/Home";
-import Likes from "./components/screens/Likes";
-import Login from "./components/screens/Login";
-import Register from "./components/screens/Register";
-import Uploads from "./components/screens/Uploads";
+import Login from "./components/stacks/Login";
+import Register from "./components/stacks/Register";
+import Home from "./components/tabs/Home";
+import Likes from "./components/tabs/Likes";
+import Uploads from "./components/tabs/Uploads";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
