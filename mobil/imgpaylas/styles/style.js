@@ -1,13 +1,5 @@
 import { StyleSheet } from "react-native";
-
-const colors = {
-  primary: "#7D7D7D",
-  important: "#FFC72E",
-  negative: "#FF6F69",
-  positive: "#42D28A",
-  background: "#F3F4F5",
-  white: "#FFFFFF",
-};
+import colors from "./colors";
 
 export default StyleSheet.create({
   container: {
@@ -15,6 +7,18 @@ export default StyleSheet.create({
     backgroundColor: colors.background,
     alignItems: "center",
     justifyContent: "center",
+  },
+  centeredView: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    padding: 12,
+  },
+  outlinedWhiteContainer: {
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    padding: 12,
   },
   textinput: {
     marginTop: 14,
@@ -51,7 +55,7 @@ export default StyleSheet.create({
     fontSize: 33,
     marginLeft: "4%",
     marginTop: 30,
-    color: colors.primary
+    color: colors.primary,
   },
   uploadnewbutton: {
     padding: 8,
@@ -62,53 +66,28 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 2,
     height: 40,
-    alignSelf: "center"
-  }
-});
-
-/*
-
-
-
-// TODO: style ları ortak bir yerden al
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F3F4F5",
-    alignItems: "center",
-    justifyContent: "center",
+    alignSelf: "center",
   },
-  textinput: {
-    marginTop: 14,
-    color: colors.primary,
-    fontSize: 17,
-    borderColor: colors.primary,
-    width: 245,
-    height: 40,
-    borderWidth: 2,
-    padding: 10,
-    borderRadius: 2,
-  },
-  loginbutton: {
+  cancelbutton: {
     padding: 8,
-    backgroundColor: colors.primary,
-    marginTop: 32,
-    width: 245,
+    backgroundColor: colors.negative,
+    marginTop: 9,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 2,
     height: 40,
+    alignSelf: "center",
   },
-  registerbutton: {
+  okaybutton: {
     padding: 8,
-    backgroundColor: colors.important,
-    marginTop: 14,
-    width: 245,
+    backgroundColor: colors.positive,
+    marginTop: 9,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 2,
     height: 40,
+    alignSelf: "center",
   },
 });
-
-*/
