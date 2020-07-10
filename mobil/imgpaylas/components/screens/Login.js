@@ -22,12 +22,10 @@ export default function Login({ navigation, screenName }) {
       .catch((error) => {
         console.log(error);
         console.log(error.code);
-        if(error.code=="auth/invalid-email")
-        {
+        if (error.code == "auth/invalid-email") {
           console.log("this does not print");
         }
-        if(error.code=="auth/ınvalıd-emaıl")
-        {
+        if (error.code == "auth/ınvalıd-emaıl") {
           console.log("this prints");
         }
 

@@ -22,7 +22,7 @@ export default function Register({ navigation, screenName }) {
             .then((s) => {
               navigation.reset({
                 index: 0,
-                routes: [{name: "Home"}]
+                routes: [{ name: "Home" }],
               });
             });
         }

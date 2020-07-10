@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
 import Home from "./components/screens/Home";
 import Likes from "./components/screens/Likes";
 import Login from "./components/screens/Login";
@@ -14,7 +15,21 @@ const Stack = createStackNavigator();
 
 function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          // TODO: DYNAMIC ICON
+
+          return (
+            <Image
+              source={require(icon)}
+              style={{ width: 36, height: 36 }}
+            />
+          );
+        },
+      })}
+      tabBarOptions={{ showLabel: false}}
+    >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Likes" component={Likes} />
       <Tab.Screen name="Uploads" component={Uploads} />
