@@ -22,6 +22,7 @@ const imagePickerOptions = {
 export default function Uploads() {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
+  let activeTask;
 
   async function upload() {
     ImagePicker.showImagePicker(imagePickerOptions, async (response) => {
@@ -30,12 +31,9 @@ export default function Uploads() {
         "user/" + auth().currentUser.uid + "/" + response.fileName
       );
       const pathToFile = response.path;
-      const task = reference.putFile(pathToFile);
+      activeTask = reference.putFile(pathToFile);
       setUploadDialogVisible(true);
-      task.on("state_changed", (taskSnapshot) => {
-        console.log(
-          (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100
-        );
+      activeTask.on("state_changed", (taskSnapshot) => {
         setUploadDialogProgress(
           Math.floor(
             (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100
@@ -57,6 +55,13 @@ export default function Uploads() {
         <Uploading
           visible={uploadDialogVisible}
           progress={uploadDialogProgress}
+          onClose={() => {
+            setUploadDialogVisible(false);
+          }}
+          onCancel={() => {
+            activeTask.cancel();
+            setUploadDialogVisible(false);
+          }}
         />
       </TouchableOpacity>
     </View>
