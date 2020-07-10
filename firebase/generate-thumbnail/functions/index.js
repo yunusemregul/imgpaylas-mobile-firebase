@@ -36,6 +36,11 @@ const THUMB_PREFIX = 'thumb_';
  * After the thumbnail has been generated and uploaded to Cloud Storage,
  * we write the public URL to the Firebase Realtime Database.
  */
+exports.createUser = functions.auth.user().onCreate(async (user) => {
+  await admin.database().ref("users").push({email: user.email, displayName: user.displayName, uid: user.uid});
+  return console.log("New user with email '"+user.email+"' saved successfully! ");
+});
+
 exports.generateThumbnail = functions.storage.object().onFinalize(async (object) => {
   // File and directory paths.
   const filePath = object.name;
@@ -96,6 +101,7 @@ exports.generateThumbnail = functions.storage.object().onFinalize(async (object)
   const thumbFileUrl = thumbResult[0];
   const fileUrl = originalResult[0];
   // Add the URLs to the Database
-  await admin.database().ref('images').push({path: fileUrl, thumbnail: thumbFileUrl});
+  const uid = fileDir.split('/')[1];
+  await admin.database().ref('images').push({path: fileUrl, thumbnail: thumbFileUrl, uid: uid, likes: 0});
   return console.log('Thumbnail URLs saved to database.');
 });
