@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import style from "../../styles/style";
 import colors from "../../styles/colors";
 import ImagePicker from "react-native-image-picker";
@@ -8,6 +8,7 @@ import storage from "@react-native-firebase/storage";
 import auth from "@react-native-firebase/auth";
 import Uploading from "../modals/Uploading";
 import ImageBox from "../ImageBox";
+import database from "@react-native-firebase/database";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -23,11 +24,15 @@ const imagePickerOptions = {
 export default function Uploads() {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
+  const [userImages, setUserImages] = useState({});
   let activeTask;
 
   async function upload() {
     ImagePicker.showImagePicker(imagePickerOptions, async (response) => {
-      console.log(response);
+      if (response.didCancel) {
+        console.log("user cancelled uploading");
+        return;
+      }
       const reference = storage().ref(
         "user/" + auth().currentUser.uid + "/" + response.fileName
       );
@@ -43,6 +48,15 @@ export default function Uploads() {
       });
     });
   }
+
+  useEffect(() => {
+    database()
+      .ref("/images")
+      .on("value", (snapshot) => {
+        let data = snapshot.val() ? snapshot.val() : {};
+        setUserImages(data);
+      });
+  }, [uploadDialogProgress]);
 
   return (
     <View>
@@ -65,7 +79,16 @@ export default function Uploads() {
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
       </TouchableOpacity>
-      <ImageBox />
+
+      <FlatList
+        data={Object.keys(userImages)}
+        renderItem={({ item }) => {
+          return <ImageBox key={item} image={userImages[item].thumbnail} />;
+        }}
+        numColumns={3}
+        keyExtractor={(item) => item}
+        style={{ padding: "4%" }}
+      />
     </View>
   );
 }

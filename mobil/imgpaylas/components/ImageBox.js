@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import style from "../styles/style";
 
-export default function ImageBox() {
+export default function ImageBox(props) {
   return (
     <View style={style.imagebox}>
-      <Text>ADANA</Text>
+      <Image source={{uri: props.image}} style={{width: "100%", height: "100%"}}/>
     </View>
   );
 }
