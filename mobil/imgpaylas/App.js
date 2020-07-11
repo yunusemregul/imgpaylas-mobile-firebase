@@ -64,8 +64,7 @@ export default function App() {
 
   function onAuthStateChanged(user) {
     setUser(user);
-    if (user != null)
-      console.log(user);
+    if (user != null) console.log(user);
     if (initializing) setInitializing(false);
   }
 

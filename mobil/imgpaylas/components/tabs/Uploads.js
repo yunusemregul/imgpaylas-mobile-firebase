@@ -7,6 +7,7 @@ import { utils } from "@react-native-firebase/app";
 import storage from "@react-native-firebase/storage";
 import auth from "@react-native-firebase/auth";
 import Uploading from "../modals/Uploading";
+import ImageBox from "../ImageBox";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -45,6 +46,17 @@ export default function Uploads() {
 
   return (
     <View>
+      <Uploading
+        visible={uploadDialogVisible}
+        progress={uploadDialogProgress}
+        onClose={() => {
+          setUploadDialogVisible(false);
+        }}
+        onCancel={() => {
+          activeTask.cancel();
+          setUploadDialogVisible(false);
+        }}
+      />
       <Text style={style.tabtitle}>Yüklediklerin</Text>
       <TouchableOpacity
         style={style.uploadnewbutton}
@@ -52,18 +64,8 @@ export default function Uploads() {
         onPress={upload}
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
-        <Uploading
-          visible={uploadDialogVisible}
-          progress={uploadDialogProgress}
-          onClose={() => {
-            setUploadDialogVisible(false);
-          }}
-          onCancel={() => {
-            activeTask.cancel();
-            setUploadDialogVisible(false);
-          }}
-        />
       </TouchableOpacity>
+      <ImageBox />
     </View>
   );
 }

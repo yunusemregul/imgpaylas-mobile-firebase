@@ -90,4 +90,11 @@ export default StyleSheet.create({
     height: 40,
     alignSelf: "center",
   },
+  imagebox: {
+    width: 100,
+    height: 100,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.primary
+  },
 });
