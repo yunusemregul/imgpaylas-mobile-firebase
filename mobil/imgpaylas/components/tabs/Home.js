@@ -1,25 +1,48 @@
-import database from "@react-native-firebase/database";
+import firestore from "@react-native-firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [images, setImages] = useState({});
+  const [isDirty, setDirty] = useState(true);
+
+  function updateImages() {
+    firestore()
+      .collection("images")
+      .get()
+      .then((querySnapshot) => {
+        let data = [];
+        querySnapshot.forEach((documentSnapshot) => {
+          data[documentSnapshot.id] = documentSnapshot.data();
+        });
+        setImages(data);
+        setDirty(false);
+      });
+  }
 
   useEffect(() => {
-    database()
-      .ref("/images")
-      .on("value", (snapshot) => {
-        let data = snapshot.val() ? snapshot.val() : {};
-        setImages(data);
-      });
-  }, []);
+    if (isDirty) {
+      updateImages();
+    }
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      updateImages();
+    });
+
+    return unsubscribe;
+  }, [navigation, isDirty]);
 
   return (
     <View>
       <Text style={style.tabtitle}>Keşfet</Text>
-      <ImageList data={images} />
+      <ImageList
+        data={images}
+        onChange={() => {
+          setDirty(true);
+        }}
+      />
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import auth from "@react-native-firebase/auth";
-import database from "@react-native-firebase/database";
+import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -19,10 +19,11 @@ const imagePickerOptions = {
   },
 };
 
-export default function Uploads() {
+export default function Uploads({ navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
   const [userImages, setUserImages] = useState({});
+  const [isDirty, setDirty] = useState(true);
   let activeTask;
 
   async function upload() {
@@ -47,16 +48,34 @@ export default function Uploads() {
     });
   }
 
-  // TODO: Sadece kullanıcının kendi uploadlarının alınması lazım dataya nasıl WHERE gibi bir istek gönderileceğini öğren
-  useEffect(() => {
-    database()
-      .ref("/images")
-      .on("value", (snapshot) => {
-        let data = snapshot.val() ? snapshot.val() : {};
+  function updateUserImages() {
+    firestore()
+      .collection("images")
+      .where("creator", "==", auth().currentUser.uid)
+      .get()
+      .then((querySnapshot) => {
+        let data = [];
+        querySnapshot.forEach((documentSnapshot) => {
+          data[documentSnapshot.id] = documentSnapshot.data();
+        });
         setUserImages(data);
-        console.log("set user images");
+
+        console.log("update user images");
+        setDirty(false);
       });
-  }, [uploadDialogProgress]);
+  }
+
+  useEffect(() => {
+    if (isDirty) {
+      updateUserImages();
+    }
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      updateUserImages();
+    });
+
+    return unsubscribe;
+  }, [navigation, isDirty]);
 
   return (
     <View>
@@ -79,7 +98,12 @@ export default function Uploads() {
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
       </TouchableOpacity>
-      <ImageList data={userImages} />
+      <ImageList
+        data={userImages}
+        onChange={() => {
+          setDirty(true);
+        }}
+      />
     </View>
   );
 }

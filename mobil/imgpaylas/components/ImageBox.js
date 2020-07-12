@@ -1,13 +1,15 @@
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 import React from "react";
 import {
   Image,
+  Text,
   TouchableHighlight,
   TouchableOpacity,
   View,
-  Text,
 } from "react-native";
-import style from "../styles/style";
 import colors from "../styles/colors";
+import style from "../styles/style";
 
 export default function ImageBox(props) {
   return (
@@ -21,21 +23,47 @@ export default function ImageBox(props) {
       <TouchableOpacity
         style={style.likescontainer}
         onPress={() => {
-          console.log("ada");
+          if (!props.data.likes.includes(auth().currentUser.uid)) {
+            firestore()
+              .collection("images")
+              .doc(props.id)
+              .update({ likes: [...props.data.likes, auth().currentUser.uid] })
+              .then(() => {
+                props.onChange();
+              });
+          } else {
+            firestore()
+              .collection("images")
+              .doc(props.id)
+              .update({
+                likes: props.data.likes.filter((val) => {
+                  return val != auth().currentUser.uid;
+                }),
+              })
+              .then(() => {
+                props.onChange();
+              });
+          }
         }}
       >
         <Text
           style={{
-            color: colors.white,
+            color: props.data.likes.includes(auth().currentUser.uid)
+              ? colors.important
+              : colors.white,
             marginLeft: 2,
             marginRight: 2,
             fontSize: 13,
           }}
         >
-          {props.data.likes}
+          {props.data.likes.length}
         </Text>
         <Image
-          source={require("../assets/images/icon_like.png")}
+          source={
+            props.data.likes.includes(auth().currentUser.uid)
+              ? require("../assets/images/icon_like_liked.png")
+              : require("../assets/images/icon_like.png")
+          }
           style={{ marginRight: 2, top: 1 }}
         />
       </TouchableOpacity>
