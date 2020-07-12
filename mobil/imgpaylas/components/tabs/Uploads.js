@@ -23,7 +23,6 @@ export default function Uploads({ navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
   const [userImages, setUserImages] = useState({});
-  const [isDirty, setDirty] = useState(true);
   let activeTask;
 
   async function upload() {
@@ -48,33 +47,19 @@ export default function Uploads({ navigation }) {
     });
   }
 
-  function updateUserImages() {
-    firestore()
+  useEffect(() => {
+    const subscriber = firestore()
       .collection("images")
       .where("creator", "==", auth().currentUser.uid)
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
           data[documentSnapshot.id] = documentSnapshot.data();
         });
         setUserImages(data);
-
-        setDirty(false);
       });
-  }
-
-  useEffect(() => {
-    if (isDirty) {
-      updateUserImages();
-    }
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      updateUserImages();
-    });
-
-    return unsubscribe;
-  }, [navigation, isDirty]);
+    return subscriber;
+  }, []);
 
   return (
     <View>
@@ -97,12 +82,7 @@ export default function Uploads({ navigation }) {
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
       </TouchableOpacity>
-      <ImageList
-        data={userImages}
-        onChange={() => {
-          setDirty(true);
-        }}
-      />
+      <ImageList data={userImages} />
     </View>
   );
 }

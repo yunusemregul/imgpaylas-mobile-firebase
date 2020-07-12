@@ -27,10 +27,7 @@ export default function ImageBox(props) {
             firestore()
               .collection("images")
               .doc(props.id)
-              .update({ likes: [...props.data.likes, auth().currentUser.uid] })
-              .then(() => {
-                props.onChange();
-              });
+              .update({ likes: [...props.data.likes, auth().currentUser.uid] });
           } else {
             firestore()
               .collection("images")
@@ -39,9 +36,6 @@ export default function ImageBox(props) {
                 likes: props.data.likes.filter((val) => {
                   return val != auth().currentUser.uid;
                 }),
-              })
-              .then(() => {
-                props.onChange();
               });
           }
         }}

@@ -6,43 +6,24 @@ import ImageList from "../ImageList";
 
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
-  const [isDirty, setDirty] = useState(true);
 
-  function updateImages() {
-    firestore()
+  useEffect(() => {
+    const subscriber = firestore()
       .collection("images")
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
           data[documentSnapshot.id] = documentSnapshot.data();
         });
         setImages(data);
-        setDirty(false);
       });
-  }
-
-  useEffect(() => {
-    if (isDirty) {
-      updateImages();
-    }
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      updateImages();
-    });
-
-    return unsubscribe;
-  }, [navigation, isDirty]);
+    return subscriber;
+  }, []);
 
   return (
     <View>
       <Text style={style.tabtitle}>Keşfet</Text>
-      <ImageList
-        data={images}
-        onChange={() => {
-          setDirty(true);
-        }}
-      />
+      <ImageList data={images} />
     </View>
   );
 }

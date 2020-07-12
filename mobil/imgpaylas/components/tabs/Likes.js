@@ -7,45 +7,26 @@ import ImageList from "../ImageList";
 
 export default function Likes({ navigation }) {
   const [userLikes, setUserLikes] = useState([]);
-  const [isDirty, setDirty] = useState(true);
 
-  function updateUserLikes() {
-    firestore()
+  useEffect(() => {
+    const subscriber = firestore()
       .collection("images")
       .where("likes", "array-contains", auth().currentUser.uid)
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
           data[documentSnapshot.id] = documentSnapshot.data();
         });
         setUserLikes(data);
-
-        setDirty(false);
       });
-  }
 
-  useEffect(() => {
-    if (isDirty) {
-      updateUserLikes();
-    }
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      updateUserLikes();
-    });
-
-    return unsubscribe;
-  }, [navigation, isDirty]);
+    return subscriber;
+  }, []);
 
   return (
     <View>
       <Text style={style.tabtitle}>Beğendiklerin</Text>
-      <ImageList
-        data={userLikes}
-        onChange={() => {
-          setDirty(true);
-        }}
-      />
+      <ImageList data={userLikes} />
     </View>
   );
 }
