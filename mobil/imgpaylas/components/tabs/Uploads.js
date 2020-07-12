@@ -54,6 +54,7 @@ export default function Uploads() {
       .on("value", (snapshot) => {
         let data = snapshot.val() ? snapshot.val() : {};
         setUserImages(data);
+        console.log("set user images");
       });
   }, [uploadDialogProgress]);
 

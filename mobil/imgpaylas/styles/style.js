@@ -98,4 +98,14 @@ export default StyleSheet.create({
     borderColor: colors.primary,
     margin: 3,
   },
+  likescontainer: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    backgroundColor: "rgba(0, 0,0, 0.5)",
+    padding: 2,
+    alignContent: "center",
+    bottom: 0,
+    alignItems: "center",
+  }
 });

@@ -1,7 +1,13 @@
 import React from "react";
-import { Image, View, Text } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import {
+  Image,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
 import style from "../styles/style";
+import colors from "../styles/colors";
 
 export default function ImageBox(props) {
   return (
@@ -12,9 +18,27 @@ export default function ImageBox(props) {
           style={{ width: "100%", height: "100%" }}
         />
       </TouchableHighlight>
-      <TouchableHighlight>
-        <Text>Beğen</Text>
-      </TouchableHighlight>
+      <TouchableOpacity
+        style={style.likescontainer}
+        onPress={() => {
+          console.log("ada");
+        }}
+      >
+        <Text
+          style={{
+            color: colors.white,
+            marginLeft: 2,
+            marginRight: 2,
+            fontSize: 13,
+          }}
+        >
+          {props.data.likes}
+        </Text>
+        <Image
+          source={require("../assets/images/icon_like.png")}
+          style={{ marginRight: 2, top: 1 }}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
