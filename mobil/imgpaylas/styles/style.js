@@ -53,15 +53,15 @@ export default StyleSheet.create({
   },
   tabtitle: {
     fontSize: 33,
-    marginLeft: "4%",
-    marginTop: 30,
+    marginLeft: 20,
+    marginTop: 36,
     color: colors.primary,
   },
   uploadnewbutton: {
     padding: 8,
     backgroundColor: colors.positive,
-    marginTop: 14,
-    width: "92%",
+    marginTop: 8,
+    width: 312,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 2,
@@ -95,6 +95,7 @@ export default StyleSheet.create({
     height: 100,
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.primary
+    borderColor: colors.primary,
+    margin: 3,
   },
 });

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
-import style from "../../styles/style";
-import colors from "../../styles/colors";
-import ImagePicker from "react-native-image-picker";
-import { utils } from "@react-native-firebase/app";
-import storage from "@react-native-firebase/storage";
 import auth from "@react-native-firebase/auth";
-import Uploading from "../modals/Uploading";
-import ImageBox from "../ImageBox";
 import database from "@react-native-firebase/database";
+import storage from "@react-native-firebase/storage";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import ImagePicker from "react-native-image-picker";
+import style from "../../styles/style";
+import ImageList from "../ImageList";
+import Uploading from "../modals/Uploading";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -49,6 +47,7 @@ export default function Uploads() {
     });
   }
 
+  // TODO: Sadece kullanıcının kendi uploadlarının alınması lazım dataya nasıl WHERE gibi bir istek gönderileceğini öğren
   useEffect(() => {
     database()
       .ref("/images")
@@ -79,16 +78,7 @@ export default function Uploads() {
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
       </TouchableOpacity>
-
-      <FlatList
-        data={Object.keys(userImages)}
-        renderItem={({ item }) => {
-          return <ImageBox key={item} image={userImages[item].thumbnail} />;
-        }}
-        numColumns={3}
-        keyExtractor={(item) => item}
-        style={{ padding: "4%" }}
-      />
+      <ImageList data={userImages} />
     </View>
   );
 }
