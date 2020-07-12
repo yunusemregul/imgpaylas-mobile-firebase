@@ -107,5 +107,5 @@ export default StyleSheet.create({
     alignContent: "center",
     bottom: 0,
     alignItems: "center",
-  }
+  },
 });

@@ -60,7 +60,6 @@ export default function Uploads({ navigation }) {
         });
         setUserImages(data);
 
-        console.log("update user images");
         setDirty(false);
       });
   }
