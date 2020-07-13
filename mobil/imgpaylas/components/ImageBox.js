@@ -12,6 +12,8 @@ import colors from "../styles/colors";
 import style from "../styles/style";
 import { useNavigation } from "@react-navigation/native";
 
+// Tek bir fotoğrafı gösteren komponent
+// TODO: Fotoğrafın tamamını gösterebilecek düzgün bir yol
 export default function ImageBox(props) {
   const navigation = useNavigation();
 

@@ -4,6 +4,7 @@ import styles from "../../styles/style";
 import auth from "@react-native-firebase/auth";
 import colors from "../../styles/colors";
 
+// Giriş sayfası
 export default function Login({ navigation, screenName }) {
   let passwordInput;
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function Login({ navigation, screenName }) {
         });
       })
       .catch((error) => {
+        // TODO: Hataları düzgün şekilde gösterebilmek
         console.log(error);
         console.log(error.code);
         if (error.code == "auth/invalid-email") {

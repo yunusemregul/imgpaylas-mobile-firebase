@@ -4,6 +4,7 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
 import firestore from "@react-native-firebase/firestore";
 
+// Kayıt sayfası
 export default function Register({ navigation, screenName }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,10 +22,6 @@ export default function Register({ navigation, screenName }) {
               displayName: name,
             })
             .then((s) => {
-              firestore()
-                .collection("users")
-                .doc(auth().currentUser.uid)
-                .update({ displayName: name });
               navigation.reset({
                 index: 0,
                 routes: [{ name: "Home" }],
@@ -33,6 +30,7 @@ export default function Register({ navigation, screenName }) {
         }
       })
       .catch((error) => {
+        // TODO: Hataları düzgün şekilde gösterebilmek
         if (error.code === "auth/email-already-in-use") {
           console.log("That email address is already in use!");
         }

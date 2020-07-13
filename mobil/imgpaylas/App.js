@@ -1,4 +1,5 @@
 import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +15,9 @@ import ImageDetails from "./components/stacks/ImageDetails";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// TODO: Çıkış yapma sayfası
+
+// Keşfet, Beğeniler, Yüklenenler sayfalarını kontrol eden navigator
 function TabNavigator() {
   return (
     <Tab.Navigator
@@ -63,9 +67,16 @@ export default function App() {
   const [user, setUser] = useState();
   const [initializing, setInitializing] = useState(true);
 
+  // kullanıcı bilgileri değiştiğinde (giriş/çıkış)
   function onAuthStateChanged(user) {
     setUser(user);
-    if (user != null) console.log(user);
+    if (user != null) {
+      console.log(user);
+      firestore()
+        .collection("users")
+        .doc(auth().currentUser.uid)
+        .update({ displayName: auth().currentUser.displayName });
+    }
     if (initializing) setInitializing(false);
   }
 

@@ -5,11 +5,12 @@ import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
-// TODO: İsim yüklenirken alt kısmın tümü yükleniyor şeklinde gösterilebilir
 
+// Bir fotoğrafa tıklandığında büyük halini ve açıklamasını (gönderen, beğeniler) gösteren komponent
 export default function ImageDetails({ route, navigation }) {
   const [data, setData] = useState(route.params.data); // Muhtemelen kötü bir yöntem
   const [creatorName, setCreatorName] = useState("...");
+  const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
     const subscriber = firestore()
@@ -20,7 +21,8 @@ export default function ImageDetails({ route, navigation }) {
       });
 
     if (route.params.data.creator == auth().currentUser.uid) {
-      return auth().currentUser.displayName;
+      setCreatorName(auth().currentUser.displayName);
+      setInitializing(false);
     } else {
       firestore()
         .collection("users")
@@ -28,11 +30,14 @@ export default function ImageDetails({ route, navigation }) {
         .get()
         .then((documentSnapshot) => {
           setCreatorName(documentSnapshot.data().displayName);
+          setInitializing(false);
         });
     }
 
     return subscriber;
   }, []);
+
+  if (initializing) return null;
 
   return (
     <View>

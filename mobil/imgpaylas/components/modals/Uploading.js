@@ -4,6 +4,7 @@ import colors from "../../styles/colors";
 import style from "../../styles/style";
 import ProgressBar from "../ProgressBar";
 
+// Kullanıcı bir fotoğraf yüklerken ne kadarı yüklendiğini vs. gösteren komponent
 export default function Uploading(props) {
   return (
     <Modal
