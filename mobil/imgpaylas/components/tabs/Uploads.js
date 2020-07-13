@@ -20,6 +20,9 @@ const imagePickerOptions = {
   },
 };
 
+// TODO: fotoğraf timestamp ına a göre sort
+// TODO: activetask.cancel hata veriyor
+
 export default function Uploads({ navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);

@@ -2,6 +2,7 @@ import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
+import firestore from "@react-native-firebase/firestore";
 
 export default function Register({ navigation, screenName }) {
   const [name, setName] = useState("");
@@ -20,6 +21,10 @@ export default function Register({ navigation, screenName }) {
               displayName: name,
             })
             .then((s) => {
+              firestore()
+                .collection("users")
+                .doc(auth().currentUser.uid)
+                .update({ displayName: name });
               navigation.reset({
                 index: 0,
                 routes: [{ name: "Home" }],

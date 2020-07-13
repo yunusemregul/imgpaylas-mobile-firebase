@@ -4,8 +4,12 @@ import colors from "../../styles/colors";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
+// TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
+// TODO: İsim yüklenirken alt kısmın tümü yükleniyor şeklinde gösterilebilir
+
 export default function ImageDetails({ route, navigation }) {
-  const [data, setData] = useState(route.params.data);
+  const [data, setData] = useState(route.params.data); // Muhtemelen kötü bir yöntem
+  const [creatorName, setCreatorName] = useState("...");
 
   useEffect(() => {
     const subscriber = firestore()
@@ -14,6 +18,19 @@ export default function ImageDetails({ route, navigation }) {
       .onSnapshot((querySnapshot) => {
         setData(querySnapshot.data());
       });
+
+    if (route.params.data.creator == auth().currentUser.uid) {
+      return auth().currentUser.displayName;
+    } else {
+      firestore()
+        .collection("users")
+        .doc(route.params.data.creator)
+        .get()
+        .then((documentSnapshot) => {
+          setCreatorName(documentSnapshot.data().displayName);
+        });
+    }
+
     return subscriber;
   }, []);
 
@@ -39,7 +56,7 @@ export default function ImageDetails({ route, navigation }) {
           marginTop: 8,
         }}
       >
-        Yunus Emre
+        {creatorName}
       </Text>
       <Text style={{ color: colors.primary, fontSize: 19, marginLeft: 12 }}>
         {new Date(data.timestamp).toString()}
