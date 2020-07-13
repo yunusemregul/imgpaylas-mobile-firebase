@@ -3,6 +3,10 @@ import { View, FlatList } from "react-native";
 import ImageBox from "./ImageBox";
 
 export default function ImageList(props) {
+  if (Object.keys(props.data) == 0) {
+    return null;
+  }
+
   return (
     <FlatList
       data={Object.keys(props.data)}

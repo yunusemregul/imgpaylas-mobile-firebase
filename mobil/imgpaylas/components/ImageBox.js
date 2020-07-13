@@ -10,11 +10,18 @@ import {
 } from "react-native";
 import colors from "../styles/colors";
 import style from "../styles/style";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ImageBox(props) {
+  const navigation = useNavigation();
+
   return (
     <View style={style.imagebox}>
-      <TouchableHighlight onPress={() => {}}>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("ImageDetails", { data: props.data });
+        }}
+      >
         <Image
           source={{ uri: props.data.thumbnail }}
           style={{ width: "100%", height: "100%" }}
@@ -48,6 +55,7 @@ export default function ImageBox(props) {
             marginLeft: 2,
             marginRight: 2,
             fontSize: 13,
+            fontWeight: "bold"
           }}
         >
           {props.data.likes.length}

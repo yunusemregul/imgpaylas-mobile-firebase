@@ -115,7 +115,13 @@ const generateThumbnail = functions.storage
     await admin
       .firestore()
       .collection("images")
-      .add({ url: fileUrl, thumbnail: thumbFileUrl, creator: uid, likes: [] })
+      .add({
+        url: fileUrl,
+        thumbnail: thumbFileUrl,
+        creator: uid,
+        likes: [],
+        timestamp: new Date().getTime(),
+      })
       .then(() => {
         console.log("New image saved into database.");
       });

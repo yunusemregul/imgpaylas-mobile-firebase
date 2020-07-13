@@ -9,6 +9,7 @@ import Register from "./components/stacks/Register";
 import Home from "./components/tabs/Home";
 import Likes from "./components/tabs/Likes";
 import Uploads from "./components/tabs/Uploads";
+import ImageDetails from "./components/stacks/ImageDetails";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -84,6 +85,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Home" component={TabNavigator} />
+        <Stack.Screen name="ImageDetails" component={ImageDetails} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>

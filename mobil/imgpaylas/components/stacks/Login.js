@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
 import auth from "@react-native-firebase/auth";
+import colors from "../../styles/colors";
 
 export default function Login({ navigation, screenName }) {
   let passwordInput;
@@ -47,7 +48,7 @@ export default function Login({ navigation, screenName }) {
       <Text
         style={{
           fontSize: 25,
-          color: "#39375B",
+          color: colors.primary,
           marginTop: 80,
         }}
       >
@@ -60,7 +61,7 @@ export default function Login({ navigation, screenName }) {
         onChangeText={(text) => {
           setEmail(text);
         }}
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
           passwordInput.focus();
         }}
@@ -76,7 +77,7 @@ export default function Login({ navigation, screenName }) {
           setPass(text);
         }}
         placeholder="Şifre"
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
           logIn();
         }}
@@ -91,7 +92,7 @@ export default function Login({ navigation, screenName }) {
       >
         <Text style={{ color: "#fff", fontSize: 17 }}>Giriş</Text>
       </TouchableOpacity>
-      <Text style={{ marginTop: 14, fontSize: 17, color: "#39375B" }}>
+      <Text style={{ marginTop: 14, fontSize: 17, color: colors.primary }}>
         ya da
       </Text>
       <TouchableOpacity

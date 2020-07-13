@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import style from "../../styles/style";
+import colors from "../../styles/colors";
 import ImageList from "../ImageList";
 import Uploading from "../modals/Uploading";
 
@@ -82,7 +83,20 @@ export default function Uploads({ navigation }) {
       >
         <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
       </TouchableOpacity>
-      <ImageList data={userImages} />
+      {Object.keys(userImages).length == 0 ? (
+        <Text
+          style={{
+            color: colors.primary,
+            textAlign: "center",
+            textAlignVertical: "center",
+            height: "80%",
+          }}
+        >
+          Henüz hiç bir şey yüklemedin.
+        </Text>
+      ) : (
+        <ImageList data={userImages} />
+      )}
     </View>
   );
 }

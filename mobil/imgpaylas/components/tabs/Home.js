@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
+import colors from "../../styles/colors";
 
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
@@ -10,6 +11,7 @@ export default function Home({ navigation }) {
   useEffect(() => {
     const subscriber = firestore()
       .collection("images")
+      .orderBy("timestamp","desc")
       .onSnapshot((querySnapshot) => {
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
@@ -23,7 +25,20 @@ export default function Home({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <Text style={style.tabtitle}>Keşfet</Text>
-      <ImageList data={images} />
+      {Object.keys(images).length == 0 ? (
+        <Text
+          style={{
+            color: colors.primary,
+            textAlign: "center",
+            textAlignVertical: "center",
+            height: "80%",
+          }}
+        >
+          Henüz hiç bir şey yüklenmedi.
+        </Text>
+      ) : (
+        <ImageList data={images} />
+      )}
     </View>
   );
 }
