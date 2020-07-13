@@ -19,7 +19,10 @@ export default function ImageBox(props) {
     <View style={style.imagebox}>
       <TouchableHighlight
         onPress={() => {
-          navigation.navigate("ImageDetails", { data: props.data });
+          navigation.navigate("ImageDetails", {
+            data: props.data,
+            id: props.id,
+          });
         }}
       >
         <Image
@@ -55,7 +58,7 @@ export default function ImageBox(props) {
             marginLeft: 2,
             marginRight: 2,
             fontSize: 13,
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           {props.data.likes.length}

@@ -1,9 +1,22 @@
-import React from "react";
-import { View, Image, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, View, Image, Text } from "react-native";
 import colors from "../../styles/colors";
 import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 
 export default function ImageDetails({ route, navigation }) {
+  const [data, setData] = useState(route.params.data);
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection("images")
+      .doc(route.params.id)
+      .onSnapshot((querySnapshot) => {
+        setData(querySnapshot.data());
+      });
+    return subscriber;
+  }, []);
+
   return (
     <View>
       <View
@@ -13,7 +26,7 @@ export default function ImageDetails({ route, navigation }) {
         }}
       >
         <Image
-          source={{ uri: route.params.data.url }}
+          source={{ uri: data.url }}
           style={{ flex: 1, width: undefined, height: undefined }}
         />
       </View>
@@ -29,19 +42,38 @@ export default function ImageDetails({ route, navigation }) {
         Yunus Emre
       </Text>
       <Text style={{ color: colors.primary, fontSize: 19, marginLeft: 12 }}>
-        {new Date(route.params.data.timestamp).toString()}
+        {new Date(data.timestamp).toString()}
       </Text>
-      <View
+      <TouchableOpacity
         style={{
           position: "absolute",
-          top: 480,
-          right: 5,
+          top: 480 + 6,
+          right: 8,
           flexDirection: "row",
+        }}
+        onPress={() => {
+          if (!data.likes.includes(auth().currentUser.uid)) {
+            firestore()
+              .collection("images")
+              .doc(route.params.id)
+              .update({
+                likes: [...data.likes, auth().currentUser.uid],
+              });
+          } else {
+            firestore()
+              .collection("images")
+              .doc(route.params.id)
+              .update({
+                likes: data.likes.filter((val) => {
+                  return val != auth().currentUser.uid;
+                }),
+              });
+          }
         }}
       >
         <Text
           style={{
-            color: route.params.data.likes.includes(auth().currentUser.uid)
+            color: data.likes.includes(auth().currentUser.uid)
               ? colors.important
               : colors.primary,
             marginLeft: 2,
@@ -50,11 +82,11 @@ export default function ImageDetails({ route, navigation }) {
             fontWeight: "bold",
           }}
         >
-          {route.params.data.likes.length}
+          {data.likes.length}
         </Text>
         <Image
           source={
-            route.params.data.likes.includes(auth().currentUser.uid)
+            data.likes.includes(auth().currentUser.uid)
               ? require("../../assets/images/icon_likes_focused.png")
               : require("../../assets/images/icon_likes.png")
           }
@@ -66,7 +98,7 @@ export default function ImageDetails({ route, navigation }) {
             alignSelf: "center",
           }}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
