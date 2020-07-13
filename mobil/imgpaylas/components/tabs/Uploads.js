@@ -62,7 +62,7 @@ export default function Uploads({ navigation }) {
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Uploading
         visible={uploadDialogVisible}
         progress={uploadDialogProgress}

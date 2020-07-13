@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
+import colors from "../../styles/colors";
 
 export default function Likes({ navigation }) {
   const [userLikes, setUserLikes] = useState([]);
@@ -24,9 +25,22 @@ export default function Likes({ navigation }) {
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Text style={style.tabtitle}>Beğendiklerin</Text>
-      <ImageList data={userLikes} />
+      {Object.keys(userLikes).length == 0 ? (
+        <Text
+          style={{
+            color: colors.primary,
+            textAlign: "center",
+            textAlignVertical: "center",
+            height: "80%",
+          }}
+        >
+          Henüz hiç bir şey beğenmedin.
+        </Text>
+      ) : (
+        <ImageList data={userLikes} />
+      )}
     </View>
   );
 }

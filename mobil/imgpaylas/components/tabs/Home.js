@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Text style={style.tabtitle}>Keşfet</Text>
       <ImageList data={images} />
     </View>

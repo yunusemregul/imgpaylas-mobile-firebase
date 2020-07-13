@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import ImageBox from "./ImageBox";
 
 export default function ImageList(props) {
