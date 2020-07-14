@@ -71,11 +71,15 @@ export default function App() {
   function onAuthStateChanged(user) {
     setUser(user);
     if (user != null) {
-      console.log(user);
+      console.log(
+        "User '" + auth().currentUser.displayName + "' logged in successfully."
+      );
       firestore()
         .collection("users")
         .doc(auth().currentUser.uid)
         .update({ displayName: auth().currentUser.displayName });
+    } else {
+      console.log("User is null.");
     }
     if (initializing) setInitializing(false);
   }

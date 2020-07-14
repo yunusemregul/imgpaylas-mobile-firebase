@@ -8,6 +8,8 @@ import style from "../../styles/style";
 import colors from "../../styles/colors";
 import ImageList from "../ImageList";
 import Uploading from "../modals/Uploading";
+import ProfileDetails from "../ProfileDetails";
+import { getUserImages } from "../../Datamanager";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -52,16 +54,15 @@ export default function Profile({ navigation }) {
   }
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection("images")
-      .where("creator", "==", auth().currentUser.uid)
-      .onSnapshot((querySnapshot) => {
+    const subscriber = getUserImages(auth().currentUser.uid).onSnapshot(
+      (querySnapshot) => {
         let data = [];
         querySnapshot.forEach((documentSnapshot) => {
           data[documentSnapshot.id] = documentSnapshot.data();
         });
         setUserImages(data);
-      });
+      }
+    );
     return subscriber;
   }, []);
 
@@ -79,6 +80,7 @@ export default function Profile({ navigation }) {
         }}
       />
       <Text style={style.tabtitle}>Profilin</Text>
+      <ProfileDetails data={{ uid: auth().currentUser.uid }} />
       <TouchableOpacity
         style={style.uploadnewbutton}
         activeOpacity={1}

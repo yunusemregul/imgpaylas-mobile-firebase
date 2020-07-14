@@ -4,21 +4,19 @@ import { Text, View } from "react-native";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
 import colors from "../../styles/colors";
+import { getAllImages } from "../../Datamanager";
 
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection("images")
-      .orderBy("timestamp","desc")
-      .onSnapshot((querySnapshot) => {
-        let data = [];
-        querySnapshot.forEach((documentSnapshot) => {
-          data[documentSnapshot.id] = documentSnapshot.data();
-        });
-        setImages(data);
+    const subscriber = getAllImages().onSnapshot((querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((documentSnapshot) => {
+        data[documentSnapshot.id] = documentSnapshot.data();
       });
+      setImages(data);
+    });
     return subscriber;
   }, []);
 

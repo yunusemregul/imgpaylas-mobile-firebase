@@ -3,6 +3,7 @@ import { TouchableOpacity, View, Image, Text } from "react-native";
 import colors from "../../styles/colors";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import { getDisplayNameFromUID, getImageDetails } from "../../Datamanager";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
 
@@ -13,30 +14,19 @@ export default function ImageDetails({ route, navigation }) {
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection("images")
-      .doc(route.params.id)
-      .onSnapshot((querySnapshot) => {
+    const subscriber = getImageDetails(route.params.id).onSnapshot(
+      (querySnapshot) => {
         setData(querySnapshot.data());
-      });
+      }
+    );
 
-    if (route.params.data.creator == auth().currentUser.uid) {
-      setCreatorName(auth().currentUser.displayName);
+    getDisplayNameFromUID(route.params.data.creator).then((name) => {
+      setCreatorName(name);
       setInitializing(false);
-    } else {
-      firestore()
-        .collection("users")
-        .doc(route.params.data.creator)
-        .get()
-        .then((documentSnapshot) => {
-          setCreatorName(documentSnapshot.data().displayName);
-          setInitializing(false);
-        });
-    }
+    });
 
     return subscriber;
   }, []);
-
   if (initializing) return null;
 
   return (
@@ -75,21 +65,15 @@ export default function ImageDetails({ route, navigation }) {
         }}
         onPress={() => {
           if (!data.likes.includes(auth().currentUser.uid)) {
-            firestore()
-              .collection("images")
-              .doc(route.params.id)
-              .update({
-                likes: [...data.likes, auth().currentUser.uid],
-              });
+            getImageDetails(route.params.id).update({
+              likes: [...data.likes, auth().currentUser.uid],
+            });
           } else {
-            firestore()
-              .collection("images")
-              .doc(route.params.id)
-              .update({
-                likes: data.likes.filter((val) => {
-                  return val != auth().currentUser.uid;
-                }),
-              });
+            getImageDetails(route.params.id).update({
+              likes: data.likes.filter((val) => {
+                return val != auth().currentUser.uid;
+              }),
+            });
           }
         }}
       >

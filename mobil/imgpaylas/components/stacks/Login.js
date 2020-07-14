@@ -11,7 +11,6 @@ export default function Login({ navigation, screenName }) {
   const [pass, setPass] = useState("");
 
   function logIn() {
-    console.log("login called");
     auth()
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
@@ -37,7 +36,6 @@ export default function Login({ navigation, screenName }) {
   }
 
   function register() {
-    console.log("register called");
     navigation.navigate("Register");
   }
 

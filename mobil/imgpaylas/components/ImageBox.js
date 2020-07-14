@@ -11,6 +11,7 @@ import {
 import colors from "../styles/colors";
 import style from "../styles/style";
 import { useNavigation } from "@react-navigation/native";
+import { getImageDetails } from "../Datamanager";
 
 // Tek bir fotoğrafı gösteren komponent
 // TODO: Fotoğrafın tamamını gösterebilecek düzgün bir yol
@@ -36,19 +37,15 @@ export default function ImageBox(props) {
         style={style.likescontainer}
         onPress={() => {
           if (!props.data.likes.includes(auth().currentUser.uid)) {
-            firestore()
-              .collection("images")
-              .doc(props.id)
-              .update({ likes: [...props.data.likes, auth().currentUser.uid] });
+            getImageDetails(props.id).update({
+              likes: [...props.data.likes, auth().currentUser.uid],
+            });
           } else {
-            firestore()
-              .collection("images")
-              .doc(props.id)
-              .update({
-                likes: props.data.likes.filter((val) => {
-                  return val != auth().currentUser.uid;
-                }),
-              });
+            getImageDetails(props.id).update({
+              likes: props.data.likes.filter((val) => {
+                return val != auth().currentUser.uid;
+              }),
+            });
           }
         }}
       >
