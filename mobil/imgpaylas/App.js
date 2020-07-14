@@ -9,13 +9,13 @@ import Login from "./components/stacks/Login";
 import Register from "./components/stacks/Register";
 import Home from "./components/tabs/Home";
 import Likes from "./components/tabs/Likes";
-import Uploads from "./components/tabs/Uploads";
+import Profile from "./components/tabs/Profile";
 import ImageDetails from "./components/stacks/ImageDetails";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// TODO: Çıkış yapma sayfası
+// TODO: Çıkış yapma sayfası, profil sayfası
 
 // Keşfet, Beğeniler, Yüklenenler sayfalarını kontrol eden navigator
 function TabNavigator() {
@@ -43,10 +43,10 @@ function TabNavigator() {
                 : require("./assets/images/icon_likes.png");
               break;
             }
-            case "uploads": {
+            case "profile": {
               icon = focused
-                ? require("./assets/images/icon_uploads_focused.png")
-                : require("./assets/images/icon_uploads.png");
+                ? require("./assets/images/icon_profile_focused.png")
+                : require("./assets/images/icon_profile.png");
               break;
             }
           }
@@ -58,7 +58,7 @@ function TabNavigator() {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Likes" component={Likes} />
-      <Tab.Screen name="Uploads" component={Uploads} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }

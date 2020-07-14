@@ -23,7 +23,7 @@ const imagePickerOptions = {
 // TODO: fotoğraf timestamp ına a göre sort
 // TODO: activetask.cancel hata veriyor
 
-export default function Uploads({ navigation }) {
+export default function Profile({ navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
   const [userImages, setUserImages] = useState({});
@@ -78,7 +78,7 @@ export default function Uploads({ navigation }) {
           setUploadDialogVisible(false);
         }}
       />
-      <Text style={style.tabtitle}>Yüklediklerin</Text>
+      <Text style={style.tabtitle}>Profilin</Text>
       <TouchableOpacity
         style={style.uploadnewbutton}
         activeOpacity={1}
