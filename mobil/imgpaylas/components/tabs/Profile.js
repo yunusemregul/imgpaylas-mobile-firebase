@@ -1,15 +1,14 @@
 import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
-import style from "../../styles/style";
+import { getUserImages } from "../../Datamanager";
 import colors from "../../styles/colors";
+import style from "../../styles/style";
 import ImageList from "../ImageList";
 import Uploading from "../modals/Uploading";
 import ProfileDetails from "../ProfileDetails";
-import { getUserImages } from "../../Datamanager";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",

@@ -1,8 +1,8 @@
+import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "../../styles/style";
-import auth from "@react-native-firebase/auth";
 import colors from "../../styles/colors";
+import styles from "../../styles/style";
 
 // Giriş sayfası
 export default function Login({ navigation, screenName }) {

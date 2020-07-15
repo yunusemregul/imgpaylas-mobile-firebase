@@ -1,10 +1,9 @@
-import firestore from "@react-native-firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { getAllImages } from "../../Datamanager";
+import colors from "../../styles/colors";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
-import colors from "../../styles/colors";
-import { getAllImages } from "../../Datamanager";
 
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});

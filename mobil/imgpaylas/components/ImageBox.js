@@ -1,5 +1,5 @@
 import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   Image,
@@ -8,10 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { getImageDetails } from "../Datamanager";
 import colors from "../styles/colors";
 import style from "../styles/style";
-import { useNavigation } from "@react-navigation/native";
-import { getImageDetails } from "../Datamanager";
 
 // Tek bir fotoğrafı gösteren komponent
 // TODO: Fotoğrafın tamamını gösterebilecek düzgün bir yol

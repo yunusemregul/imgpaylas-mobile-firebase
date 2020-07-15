@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity, View, Image, Text } from "react-native";
-import colors from "../../styles/colors";
 import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { getDisplayNameFromUID, getImageDetails } from "../../Datamanager";
+import colors from "../../styles/colors";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
 
