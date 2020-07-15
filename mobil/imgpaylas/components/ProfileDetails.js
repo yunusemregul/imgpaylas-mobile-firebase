@@ -59,10 +59,10 @@ export default function ProfileDetails({ data }) {
             alignSelf: "center",
           }}
         >
-          <TopBottomText topText={"1"} bottomText="gönderi" />
+          <TopBottomText topText={data.postCount} bottomText="gönderi" />
           <TopBottomText
             style={{ marginLeft: 30 }}
-            topText={"1"}
+            topText={data.likesCount}
             bottomText="beğeni"
           />
         </View>

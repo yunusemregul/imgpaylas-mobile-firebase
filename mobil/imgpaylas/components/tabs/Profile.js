@@ -9,6 +9,7 @@ import style from "../../styles/style";
 import ImageList from "../ImageList";
 import Uploading from "../modals/Uploading";
 import ProfileDetails from "../ProfileDetails";
+import Loading from "../Loading";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -24,10 +25,14 @@ const imagePickerOptions = {
 // TODO: fotoğraf timestamp ına a göre sort
 // TODO: activetask.cancel hata veriyor
 
-export default function Profile({ navigation }) {
+export default function Profile({ route, navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
   const [uploadDialogProgress, setUploadDialogProgress] = useState(0);
+  const [userPostCount, setUserPostCount] = useState(0);
+  const [userLikesCount, setUserLikesCount] = useState(0);
   const [userImages, setUserImages] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const uid = route.params ? route.params.uid : auth().currentUser.uid;
   let activeTask;
 
   async function upload() {
@@ -36,9 +41,7 @@ export default function Profile({ navigation }) {
         console.log("user cancelled uploading");
         return;
       }
-      const reference = storage().ref(
-        "user/" + auth().currentUser.uid + "/" + response.fileName
-      );
+      const reference = storage().ref("user/" + uid + "/" + response.fileName);
       const pathToFile = response.path;
       activeTask = reference.putFile(pathToFile);
       setUploadDialogVisible(true);
@@ -53,17 +56,22 @@ export default function Profile({ navigation }) {
   }
 
   useEffect(() => {
-    const subscriber = getUserImages(auth().currentUser.uid).onSnapshot(
-      (querySnapshot) => {
-        let data = [];
-        querySnapshot.forEach((documentSnapshot) => {
-          data[documentSnapshot.id] = documentSnapshot.data();
-        });
-        setUserImages(data);
-      }
-    );
+    const subscriber = getUserImages(uid).onSnapshot((querySnapshot) => {
+      let data = [];
+      let totalLikes = 0;
+      querySnapshot.forEach((documentSnapshot) => {
+        data[documentSnapshot.id] = documentSnapshot.data();
+        totalLikes += documentSnapshot.data().likes.length;
+      });
+      setUserLikesCount(totalLikes);
+      setUserPostCount(Object.keys(data).length);
+      setUserImages(data);
+      setIsLoading(false);
+    });
     return subscriber;
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <View style={{ flex: 1 }}>
@@ -78,15 +86,27 @@ export default function Profile({ navigation }) {
           setUploadDialogVisible(false);
         }}
       />
-      <Text style={style.tabtitle}>Profilin</Text>
-      <ProfileDetails data={{ uid: auth().currentUser.uid }} />
-      <TouchableOpacity
-        style={style.uploadnewbutton}
-        activeOpacity={1}
-        onPress={upload}
-      >
-        <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
-      </TouchableOpacity>
+      {uid != auth().currentUser.uid ? (
+        <View style={{ marginTop: 28 }} />
+      ) : (
+        <Text style={style.tabtitle}>Profilin</Text>
+      )}
+      <ProfileDetails
+        data={{
+          uid: uid,
+          likesCount: userLikesCount,
+          postCount: userPostCount,
+        }}
+      />
+      {uid == auth().currentUser.uid && (
+        <TouchableOpacity
+          style={style.uploadnewbutton}
+          activeOpacity={1}
+          onPress={upload}
+        >
+          <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
+        </TouchableOpacity>
+      )}
       {Object.keys(userImages).length == 0 ? (
         <Text
           style={{
@@ -96,7 +116,8 @@ export default function Profile({ navigation }) {
             height: "80%",
           }}
         >
-          Henüz hiç bir şey yüklemedin.
+          Henüz hiç bir şey yüklemedi
+          {uid == auth().currentUser.uid && "n"}.
         </Text>
       ) : (
         <ImageList data={userImages} />

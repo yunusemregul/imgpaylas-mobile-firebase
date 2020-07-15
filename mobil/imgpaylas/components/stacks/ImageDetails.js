@@ -41,17 +41,25 @@ export default function ImageDetails({ route, navigation }) {
           style={{ flex: 1, width: undefined, height: undefined }}
         />
       </View>
-      <Text
-        style={{
-          color: colors.primary,
-          fontSize: 27,
-          fontWeight: "bold",
-          marginLeft: 12,
-          marginTop: 8,
+      <TouchableOpacity
+        onPress={() => {
+          navigation.push("ProfileDetails", {
+            uid: route.params.data.creator,
+          });
         }}
       >
-        {creatorName}
-      </Text>
+        <Text
+          style={{
+            color: colors.primary,
+            fontSize: 27,
+            fontWeight: "bold",
+            marginLeft: 12,
+            marginTop: 8,
+          }}
+        >
+          {creatorName}
+        </Text>
+      </TouchableOpacity>
       <Text style={{ color: colors.primary, fontSize: 19, marginLeft: 12 }}>
         {new Date(data.timestamp).toString()}
       </Text>

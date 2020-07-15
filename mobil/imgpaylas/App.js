@@ -101,6 +101,7 @@ export default function App() {
       >
         <Stack.Screen name="Home" component={TabNavigator} />
         <Stack.Screen name="ImageDetails" component={ImageDetails} />
+        <Stack.Screen name="ProfileDetails" component={Profile} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>

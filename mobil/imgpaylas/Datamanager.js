@@ -18,9 +18,7 @@ function getDisplayNameFromUID(uid) {
 }
 
 function getUserImages(uid) {
-  return firestore()
-    .collection("images")
-    .where("creator", "==", auth().currentUser.uid);
+  return firestore().collection("images").where("creator", "==", uid);
 }
 
 function getImageDetails(id) {
@@ -31,4 +29,14 @@ function getAllImages() {
   return firestore().collection("images").orderBy("timestamp", "desc");
 }
 
-export { getDisplayNameFromUID, getUserImages, getAllImages, getImageDetails };
+function getUserLikes(uid) {
+  return firestore().collection("images").where("likes", "array-contains", uid);
+}
+
+export {
+  getDisplayNameFromUID,
+  getUserImages,
+  getAllImages,
+  getImageDetails,
+  getUserLikes,
+};
