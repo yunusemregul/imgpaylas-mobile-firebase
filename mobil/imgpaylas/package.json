@@ -32,11 +32,6 @@
     "jetifier": "^1.6.6",
     "react-test-renderer": "~16.11.0"
   },
-  "rnpm": {
-    "assets": [
-      ".assets/fonts/"
-    ]
-  },
   "private": true,
   "name": "imgpaylas",
   "version": "1.0.0"

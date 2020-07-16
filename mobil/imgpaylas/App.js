@@ -15,7 +15,7 @@ import ImageDetails from "./components/stacks/ImageDetails";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// TODO: Çıkış yapma sayfası, profil sayfası
+// TODO: Çıkış yapma sayfası
 
 // Keşfet, Beğeniler, Yüklenenler sayfalarını kontrol eden navigator
 function TabNavigator() {

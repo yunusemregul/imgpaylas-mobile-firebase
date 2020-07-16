@@ -34,11 +34,17 @@ export default function ImageDetails({ route, navigation }) {
         style={{
           width: "100%",
           height: 480,
+          backgroundColor: "black",
         }}
       >
         <Image
           source={{ uri: data.url }}
-          style={{ flex: 1, width: undefined, height: undefined }}
+          style={{
+            flex: 1,
+            width: undefined,
+            height: undefined,
+            resizeMode: "contain",
+          }}
         />
       </View>
       <TouchableOpacity

@@ -13,7 +13,6 @@ import colors from "../styles/colors";
 import style from "../styles/style";
 
 // Tek bir fotoğrafı gösteren komponent
-// TODO: Fotoğrafın tamamını gösterebilecek düzgün bir yol
 export default function ImageBox(props) {
   const navigation = useNavigation();
 

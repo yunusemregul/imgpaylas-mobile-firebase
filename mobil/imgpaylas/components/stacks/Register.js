@@ -2,7 +2,6 @@ import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
-import firestore from "@react-native-firebase/firestore";
 
 // Kayıt sayfası
 export default function Register({ navigation, screenName }) {
