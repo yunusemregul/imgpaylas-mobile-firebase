@@ -6,7 +6,7 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { getImageDetails } from "../Datamanager";
 import colors from "../styles/colors";
