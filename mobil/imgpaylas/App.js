@@ -4,8 +4,6 @@ import React, { useEffect, useState } from "react";
 import StackNavigator from "./components/navigators/StackNavigator";
 import { getUser } from "./Datamanager";
 
-// TODO: Çıkış yapma sayfası
-
 export default function App() {
   const [user, setUser] = useState();
   const [initializing, setInitializing] = useState(true);

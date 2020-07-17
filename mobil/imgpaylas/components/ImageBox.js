@@ -6,9 +6,9 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
-import { getImageDetails } from "../Datamanager";
+import { likeImage, removeLikeFromImage } from "../Datamanager";
 import colors from "../styles/colors";
 import style from "../styles/style";
 
@@ -35,15 +35,9 @@ export default function ImageBox(props) {
         style={style.likescontainer}
         onPress={() => {
           if (!props.data.likes.includes(auth().currentUser.uid)) {
-            getImageDetails(props.id).update({
-              likes: [...props.data.likes, auth().currentUser.uid],
-            });
+            likeImage(props.id, props.data.likes);
           } else {
-            getImageDetails(props.id).update({
-              likes: props.data.likes.filter((val) => {
-                return val != auth().currentUser.uid;
-              }),
-            });
+            removeLikeFromImage(props.id, props.data.likes);
           }
         }}
       >

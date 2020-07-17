@@ -32,6 +32,7 @@ export default StyleSheet.create({
     borderWidth: 2,
     padding: 10,
     borderRadius: 2,
+    backgroundColor: colors.white,
   },
   loginbutton: {
     padding: 8,

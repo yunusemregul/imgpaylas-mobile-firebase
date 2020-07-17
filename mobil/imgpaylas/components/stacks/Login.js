@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from "../../styles/colors";
 import styles from "../../styles/style";
+import { color } from "react-native-reanimated";
 
 // Giriş sayfası
 export default function Login({ navigation, screenName }) {
@@ -94,9 +95,32 @@ export default function Login({ navigation, screenName }) {
         Şifremi Unuttum
       </Text>
       <View style={{ position: "absolute", bottom: 32, alignItems: "center" }}>
-        <Text style={{ marginTop: 14, fontSize: 17, color: colors.primary }}>
-          ya da
-        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flex: 1,
+              borderBottomColor: colors.primary,
+              borderBottomWidth: 1,
+            }}
+          />
+          <Text
+            style={{
+              flex: 1,
+              fontSize: 17,
+              color: colors.primary,
+              textAlign: "center",
+            }}
+          >
+            ya da
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              borderBottomColor: colors.primary,
+              borderBottomWidth: 1,
+            }}
+          />
+        </View>
         <TouchableOpacity
           title="Kayıt Ol"
           style={styles.registerbutton}

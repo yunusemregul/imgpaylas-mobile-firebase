@@ -1,7 +1,12 @@
 import auth from "@react-native-firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { getDisplayNameFromUID, getImageDetails } from "../../Datamanager";
+import {
+  getDisplayNameFromUID,
+  getImageDetails,
+  likeImage,
+  removeLikeFromImage,
+} from "../../Datamanager";
 import colors from "../../styles/colors";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
@@ -79,15 +84,9 @@ export default function ImageDetails({ route, navigation }) {
         }}
         onPress={() => {
           if (!data.likes.includes(auth().currentUser.uid)) {
-            getImageDetails(route.params.id).update({
-              likes: [...data.likes, auth().currentUser.uid],
-            });
+            likeImage(route.params.id, data.likes);
           } else {
-            getImageDetails(route.params.id).update({
-              likes: data.likes.filter((val) => {
-                return val != auth().currentUser.uid;
-              }),
-            });
+            removeLikeFromImage(route.params.id, data.likes);
           }
         }}
       >

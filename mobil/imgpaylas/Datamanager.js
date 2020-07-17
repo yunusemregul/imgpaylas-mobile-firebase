@@ -35,6 +35,20 @@ function getAllImages() {
   return firestore().collection("images").orderBy("timestamp", "desc");
 }
 
+function likeImage(id, likes) {
+  getImageDetails(id).update({
+    likes: [...likes, auth().currentUser.uid],
+  });
+}
+
+function removeLikeFromImage(id, likes) {
+  getImageDetails(id).update({
+    likes: likes.filter((val) => {
+      return val != auth().currentUser.uid;
+    }),
+  });
+}
+
 export {
   getDisplayNameFromUID,
   getUserImages,
@@ -42,5 +56,6 @@ export {
   getImageDetails,
   getUserLikes,
   getUser,
+  likeImage,
+  removeLikeFromImage,
 };
-
