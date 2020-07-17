@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 
+// TODO: butonların yaptığı gereksiz bir kalabalık var düzeltilmeli belki buton componenti yaparak
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -34,7 +36,7 @@ export default StyleSheet.create({
   loginbutton: {
     padding: 8,
     backgroundColor: colors.primary,
-    marginTop: 32,
+    marginTop: 14,
     width: 245,
     alignItems: "center",
     justifyContent: "center",

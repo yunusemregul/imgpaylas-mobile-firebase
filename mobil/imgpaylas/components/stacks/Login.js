@@ -45,18 +45,9 @@ export default function Login({ navigation, screenName }) {
         source={require("../../assets/images/logo.png")}
         style={{ width: 214, height: 64 }}
       />
-      <Text
-        style={{
-          fontSize: 25,
-          color: colors.primary,
-          marginTop: 80,
-        }}
-      >
-        Üye Girişi
-      </Text>
       <TextInput
         autoCompleteType="email"
-        style={styles.textinput}
+        style={{ ...styles.textinput, marginTop: 32 }}
         placeholder="E-posta"
         onChangeText={(text) => {
           setEmail(text);
@@ -92,19 +83,31 @@ export default function Login({ navigation, screenName }) {
       >
         <Text style={{ color: "#fff", fontSize: 17 }}>Giriş</Text>
       </TouchableOpacity>
-      <Text style={{ marginTop: 14, fontSize: 17, color: colors.primary }}>
-        ya da
-      </Text>
-      <TouchableOpacity
-        title="Kayıt Ol"
-        style={styles.registerbutton}
-        activeOpacity={1}
-        onPress={() => {
-          register();
+      <Text
+        style={{
+          marginTop: 14,
+          fontSize: 17,
+          color: colors.primary,
+          textDecorationLine: "underline",
         }}
       >
-        <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
-      </TouchableOpacity>
+        Şifremi Unuttum
+      </Text>
+      <View style={{ position: "absolute", bottom: 32, alignItems: "center" }}>
+        <Text style={{ marginTop: 14, fontSize: 17, color: colors.primary }}>
+          ya da
+        </Text>
+        <TouchableOpacity
+          title="Kayıt Ol"
+          style={styles.registerbutton}
+          activeOpacity={1}
+          onPress={() => {
+            register();
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 17 }}>Kayıt Ol</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

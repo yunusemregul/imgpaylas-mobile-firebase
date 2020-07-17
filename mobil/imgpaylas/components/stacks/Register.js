@@ -2,6 +2,7 @@ import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../../styles/style";
+import colors from "../../styles/colors";
 
 // Kayıt sayfası
 export default function Register({ navigation, screenName }) {
@@ -47,7 +48,7 @@ export default function Register({ navigation, screenName }) {
       <Text
         style={{
           fontSize: 25,
-          color: "#39375B",
+          color: colors.primary,
         }}
       >
         Üye Kaydı
@@ -55,7 +56,7 @@ export default function Register({ navigation, screenName }) {
       <TextInput
         style={styles.textinput}
         placeholder="Ad"
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onChangeText={(text) => setName(text)}
         onSubmitEditing={() => {
           emailInput.focus();
@@ -69,7 +70,7 @@ export default function Register({ navigation, screenName }) {
         autoCompleteType="email"
         style={styles.textinput}
         placeholder="E-posta"
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
           passwordInput.focus();
         }}
@@ -83,7 +84,7 @@ export default function Register({ navigation, screenName }) {
         secureTextEntry={true}
         style={styles.textinput}
         placeholder="Şifre"
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
           passwordAgainInput.focus();
         }}
@@ -96,7 +97,7 @@ export default function Register({ navigation, screenName }) {
         secureTextEntry={true}
         style={styles.textinput}
         placeholder="Şifre Tekrarı"
-        placeholderTextColor="#39375B"
+        placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
           register();
         }}
