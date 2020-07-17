@@ -4,6 +4,7 @@ import { getAllImages } from "../../Datamanager";
 import colors from "../../styles/colors";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
+import TabTitle from "../TabTitle";
 
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
@@ -21,7 +22,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text style={style.tabtitle}>Keşfet</Text>
+      <TabTitle title="Keşfet" />
       {Object.keys(images).length == 0 ? (
         <Text
           style={{

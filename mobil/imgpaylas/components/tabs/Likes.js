@@ -5,6 +5,7 @@ import colors from "../../styles/colors";
 import style from "../../styles/style";
 import ImageList from "../ImageList";
 import { getUserLikes } from "../../Datamanager";
+import TabTitle from "../TabTitle";
 
 export default function Likes({ navigation }) {
   const [userLikes, setUserLikes] = useState([]);
@@ -25,7 +26,7 @@ export default function Likes({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text style={style.tabtitle}>Beğendiklerin</Text>
+      <TabTitle title="Beğendiklerin" />
       {Object.keys(userLikes).length == 0 ? (
         <Text
           style={{

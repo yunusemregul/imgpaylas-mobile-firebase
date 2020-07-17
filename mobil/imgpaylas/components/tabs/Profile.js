@@ -1,7 +1,7 @@
 import auth from "@react-native-firebase/auth";
 import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import { getUserImages } from "../../Datamanager";
 import colors from "../../styles/colors";
@@ -10,6 +10,7 @@ import ImageList from "../ImageList";
 import Uploading from "../modals/Uploading";
 import ProfileDetails from "../ProfileDetails";
 import Loading from "../Loading";
+import TabTitle from "../TabTitle";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -24,6 +25,8 @@ const imagePickerOptions = {
 
 // TODO: fotoğraf timestamp ına a göre sort
 // TODO: activetask.cancel hata veriyor
+// TODO: profil fotoğrafı?
+// TODO: isim değiştirebilme özelliği?
 
 export default function Profile({ route, navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);
@@ -89,7 +92,20 @@ export default function Profile({ route, navigation }) {
       {uid != auth().currentUser.uid ? (
         <View style={{ marginTop: 28 }} />
       ) : (
-        <Text style={style.tabtitle}>Profilin</Text>
+        <TabTitle title="Profilin">
+          <TouchableOpacity
+            onPress={() => {
+              navigation.push("Settings");
+            }}
+            style={{
+              alignSelf: "flex-end",
+              marginLeft: "auto",
+              marginRight: 20,
+            }}
+          >
+            <Image source={require("../../assets/images/icon_settings.png")} />
+          </TouchableOpacity>
+        </TabTitle>
       )}
       <ProfileDetails
         data={{
