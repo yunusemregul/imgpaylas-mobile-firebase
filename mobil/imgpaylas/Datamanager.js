@@ -1,5 +1,9 @@
 import auth from "@react-native-firebase/auth";
+//import firebase from "@react-native-firebase/app";
 import firestore from "@react-native-firebase/firestore";
+//import "@react-native-firebase/functions";
+
+//var functions = firebase.app().functions("europe-west3");
 
 function getUser(uid) {
   return firestore().collection("users").doc(uid);
@@ -39,6 +43,8 @@ function likeImage(id, likes) {
   getImageDetails(id).update({
     likes: [...likes, auth().currentUser.uid],
   });
+  // firebase fonksiyonları çok yavaş işliyor çözemedim
+  //functions.httpsCallable("likeImage")({ imageId: id });
 }
 
 function removeLikeFromImage(id, likes) {
@@ -47,6 +53,10 @@ function removeLikeFromImage(id, likes) {
       return val != auth().currentUser.uid;
     }),
   });
+  // firebase fonksiyonları çok yavaş işliyor çözemedim
+  /*functions.httpsCallable("removeLikeFromImage")({
+    imageId: id,
+  });*/
 }
 
 export {
