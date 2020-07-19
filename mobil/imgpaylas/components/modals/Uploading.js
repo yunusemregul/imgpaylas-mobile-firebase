@@ -25,9 +25,13 @@ export default function Uploading(props) {
           </Text>
           <ProgressBar progress={props.progress} />
           <TouchableOpacity
-            style={
-              props.progress == 100 ? style.okaybutton : style.cancelbutton
-            }
+            style={{
+              ...style.button,
+              marginTop: 9,
+              width: 292,
+              backgroundColor:
+                props.progress == 100 ? colors.positive : colors.negative,
+            }}
             activeOpacity={1}
             onPress={props.progress == 100 ? props.onClose : props.onCancel}
           >

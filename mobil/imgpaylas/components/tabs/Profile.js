@@ -116,7 +116,13 @@ export default function Profile({ route, navigation }) {
       />
       {uid == auth().currentUser.uid && (
         <TouchableOpacity
-          style={style.uploadnewbutton}
+          style={{
+            ...style.button,
+            marginTop: 8,
+            width: 312,
+            backgroundColor: colors.positive,
+            alignSelf: "center",
+          }}
           activeOpacity={1}
           onPress={upload}
         >

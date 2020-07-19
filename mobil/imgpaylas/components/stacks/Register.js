@@ -1,7 +1,7 @@
 import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "../../styles/style";
+import style from "../../styles/style";
 import colors from "../../styles/colors";
 
 // Kayıt sayfası
@@ -44,7 +44,7 @@ export default function Register({ navigation, screenName }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
       <Text
         style={{
           fontSize: 25,
@@ -54,7 +54,7 @@ export default function Register({ navigation, screenName }) {
         Üye Kaydı
       </Text>
       <TextInput
-        style={styles.textinput}
+        style={style.textinput}
         placeholder="Ad"
         placeholderTextColor={colors.primary}
         onChangeText={(text) => setName(text)}
@@ -68,7 +68,7 @@ export default function Register({ navigation, screenName }) {
         }}
         onChangeText={(text) => setEmail(text)}
         autoCompleteType="email"
-        style={styles.textinput}
+        style={style.textinput}
         placeholder="E-posta"
         placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
@@ -82,7 +82,7 @@ export default function Register({ navigation, screenName }) {
         onChangeText={(text) => setPass(text)}
         autoCompleteType="password"
         secureTextEntry={true}
-        style={styles.textinput}
+        style={style.textinput}
         placeholder="Şifre"
         placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
@@ -95,7 +95,7 @@ export default function Register({ navigation, screenName }) {
         }}
         autoCompleteType="password"
         secureTextEntry={true}
-        style={styles.textinput}
+        style={style.textinput}
         placeholder="Şifre Tekrarı"
         placeholderTextColor={colors.primary}
         onSubmitEditing={() => {
@@ -104,7 +104,7 @@ export default function Register({ navigation, screenName }) {
       />
       <TouchableOpacity
         title="Kayıt Ol"
-        style={styles.registerbutton}
+        style={{ ...style.button, backgroundColor: colors.important }}
         activeOpacity={1}
         onPress={() => {
           register();

@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 
-// TODO: butonların yaptığı gereksiz bir kalabalık var düzeltilmeli belki buton componenti yaparak
-
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -34,19 +32,9 @@ export default StyleSheet.create({
     borderRadius: 2,
     backgroundColor: colors.white,
   },
-  loginbutton: {
+  button: {
     padding: 8,
     backgroundColor: colors.primary,
-    marginTop: 14,
-    width: 245,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-  },
-  registerbutton: {
-    padding: 8,
-    backgroundColor: colors.important,
     marginTop: 14,
     width: 245,
     alignItems: "center",
@@ -59,39 +47,6 @@ export default StyleSheet.create({
     marginLeft: 20,
     marginTop: 36,
     color: colors.primary,
-  },
-  uploadnewbutton: {
-    padding: 8,
-    backgroundColor: colors.positive,
-    marginTop: 8,
-    width: 312,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-    alignSelf: "center",
-  },
-  cancelbutton: {
-    padding: 8,
-    backgroundColor: colors.negative,
-    marginTop: 9,
-    width: 292,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-    alignSelf: "center",
-  },
-  okaybutton: {
-    padding: 8,
-    backgroundColor: colors.positive,
-    marginTop: 9,
-    width: 292,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 2,
-    height: 40,
-    alignSelf: "center",
   },
   imagebox: {
     width: 100,

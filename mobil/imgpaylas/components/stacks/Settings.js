@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import TabTitle from "../TabTitle";
 import style from "../../styles/style";
+import colors from "../../styles/colors";
 
 export default function Settings({ navigation }) {
   function logOff() {
@@ -20,7 +21,12 @@ export default function Settings({ navigation }) {
     <View>
       <TabTitle title="Ayarlar" />
       <TouchableOpacity
-        style={{ ...style.cancelbutton, width: 312 }}
+        style={{
+          ...style.button,
+          width: 312,
+          backgroundColor: colors.negative,
+          alignSelf: "center",
+        }}
         activeOpacity={1}
         onPress={logOff}
       >

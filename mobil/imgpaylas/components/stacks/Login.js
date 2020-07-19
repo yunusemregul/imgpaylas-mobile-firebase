@@ -2,14 +2,16 @@ import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from "../../styles/colors";
-import styles from "../../styles/style";
-import { color } from "react-native-reanimated";
+import style from "../../styles/style";
+import Error from "../modals/Error";
 
 // Giriş sayfası
 export default function Login({ navigation, screenName }) {
   let passwordInput;
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [errorScreenVisible, setErrorScreenVisible] = useState(false);
+  const [errorMesage, setErrorMesage] = useState("");
 
   function logIn() {
     auth()
@@ -41,14 +43,22 @@ export default function Login({ navigation, screenName }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
+      <Error
+        visible={errorScreenVisible}
+        onClose={() => {
+          setErrorScreenVisible(false);
+        }}
+      >
+        {errorMesage}
+      </Error>
       <Image
         source={require("../../assets/images/logo.png")}
         style={{ width: 214, height: 64 }}
       />
       <TextInput
         autoCompleteType="email"
-        style={{ ...styles.textinput, marginTop: 32 }}
+        style={{ ...style.textinput, marginTop: 32 }}
         placeholder="E-posta"
         onChangeText={(text) => {
           setEmail(text);
@@ -64,7 +74,7 @@ export default function Login({ navigation, screenName }) {
         }}
         autoCompleteType="password"
         secureTextEntry={true}
-        style={styles.textinput}
+        style={style.textinput}
         onChangeText={(text) => {
           setPass(text);
         }}
@@ -76,7 +86,7 @@ export default function Login({ navigation, screenName }) {
       />
       <TouchableOpacity
         title="Giriş"
-        style={styles.loginbutton}
+        style={style.button}
         activeOpacity={1}
         onPress={() => {
           logIn();
@@ -123,7 +133,7 @@ export default function Login({ navigation, screenName }) {
         </View>
         <TouchableOpacity
           title="Kayıt Ol"
-          style={styles.registerbutton}
+          style={{ ...style.button, backgroundColor: colors.important }}
           activeOpacity={1}
           onPress={() => {
             register();
