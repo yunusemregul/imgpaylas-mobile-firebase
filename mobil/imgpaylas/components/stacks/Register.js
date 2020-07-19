@@ -3,16 +3,40 @@ import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import style from "../../styles/style";
 import colors from "../../styles/colors";
+import Error from "../modals/Error";
 
 // Kayıt sayfası
 export default function Register({ navigation, screenName }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [passAgain, setPassAgain] = useState("");
+  const [errorScreenVisible, setErrorScreenVisible] = useState(false);
+  const [errorMesage, setErrorMesage] = useState("");
 
   let emailInput, passwordInput, passwordAgainInput;
 
+  function showErrorScreen(message) {
+    setErrorMesage(message);
+    setErrorScreenVisible(true);
+  }
+
   function register() {
+    if (name.length == 0 || email.length == 0 || pass.length == 0) {
+      showErrorScreen("Tüm alanlar doldurulmalıdır!");
+      return;
+    }
+
+    if (pass.length < 6) {
+      showErrorScreen("Şifre en az 6 karakterli olmalıdır!");
+      return;
+    }
+
+    if (pass != passAgain) {
+      showErrorScreen("Şifreler uyuşmuyor!");
+      return;
+    }
+
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then((userCredentials) => {
@@ -32,19 +56,29 @@ export default function Register({ navigation, screenName }) {
       .catch((error) => {
         // TODO: Hataları düzgün şekilde gösterebilmek
         if (error.code === "auth/email-already-in-use") {
-          console.log("That email address is already in use!");
+          showErrorScreen("Bu e-posta adresi zaten kullanılıyor!");
+          return;
         }
 
         if (error.code === "auth/invalid-email") {
-          console.log("That email address is invalid!");
+          showErrorScreen("Geçersiz e-posta!");
+          return;
         }
 
-        console.error(error);
+        showErrorScreen("Bilinmeyen hata!");
       });
   }
 
   return (
     <View style={style.container}>
+      <Error
+        visible={errorScreenVisible}
+        onClose={() => {
+          setErrorScreenVisible(false);
+        }}
+      >
+        {errorMesage}
+      </Error>
       <Text
         style={{
           fontSize: 25,
@@ -98,6 +132,7 @@ export default function Register({ navigation, screenName }) {
         style={style.textinput}
         placeholder="Şifre Tekrarı"
         placeholderTextColor={colors.primary}
+        onChangeText={(text) => setPassAgain(text)}
         onSubmitEditing={() => {
           register();
         }}

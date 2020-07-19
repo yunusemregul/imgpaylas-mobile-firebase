@@ -13,7 +13,17 @@ export default function Login({ navigation, screenName }) {
   const [errorScreenVisible, setErrorScreenVisible] = useState(false);
   const [errorMesage, setErrorMesage] = useState("");
 
+  function showErrorScreen(message) {
+    setErrorMesage(message);
+    setErrorScreenVisible(true);
+  }
+
   function logIn() {
+    if (email.length == 0 || pass.length == 0) {
+      showErrorScreen("E-posta ya da şifre boş olamaz!");
+      return;
+    }
+
     auth()
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
@@ -24,17 +34,7 @@ export default function Login({ navigation, screenName }) {
         });
       })
       .catch((error) => {
-        // TODO: Hataları düzgün şekilde gösterebilmek
-        console.log(error);
-        console.log(error.code);
-        if (error.code == "auth/invalid-email") {
-          console.log("this does not print");
-        }
-        if (error.code == "auth/ınvalıd-emaıl") {
-          console.log("this prints");
-        }
-
-        //console.error(error);
+        showErrorScreen("E-posta ya da şifre hatalı!"); // şimdilik böyle genel bir hata
       });
   }
 
