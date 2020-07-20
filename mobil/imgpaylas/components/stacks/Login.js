@@ -4,6 +4,8 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from "../../styles/colors";
 import style from "../../styles/style";
 import Error from "../modals/Error";
+import CustomButton from "../CustomButton";
+import Loading from "../Loading";
 
 // Giriş sayfası
 export default function Login({ navigation, screenName }) {
@@ -12,13 +14,19 @@ export default function Login({ navigation, screenName }) {
   const [pass, setPass] = useState("");
   const [errorScreenVisible, setErrorScreenVisible] = useState(false);
   const [errorMesage, setErrorMesage] = useState("");
+  const [isLoggingIn, setLoggingIn] = useState(false);
 
+  // belki daha iyi bir yöntem bulunabilir
   function showErrorScreen(message) {
+    console.log("Login error: " + message);
     setErrorMesage(message);
     setErrorScreenVisible(true);
+    setLoggingIn(false);
   }
 
   function logIn() {
+    setLoggingIn(true);
+    console.log("Trying to log in.");
     if (email.length == 0 || pass.length == 0) {
       showErrorScreen("E-posta ya da şifre boş olamaz!");
       return;
@@ -41,6 +49,8 @@ export default function Login({ navigation, screenName }) {
   function register() {
     navigation.navigate("Register");
   }
+
+  if (isLoggingIn) return <Loading>Giriş yapılıyor...</Loading>;
 
   return (
     <View style={style.container}>
@@ -84,16 +94,7 @@ export default function Login({ navigation, screenName }) {
           logIn();
         }}
       />
-      <TouchableOpacity
-        title="Giriş"
-        style={style.button}
-        activeOpacity={1}
-        onPress={() => {
-          logIn();
-        }}
-      >
-        <Text style={{ color: "#fff", fontSize: 17 }}>Giriş</Text>
-      </TouchableOpacity>
+      <CustomButton onPress={logIn}>Giriş</CustomButton>
       <Text
         style={{
           marginTop: 14,

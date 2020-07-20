@@ -16,6 +16,7 @@ export default function Register({ navigation, screenName }) {
 
   let emailInput, passwordInput, passwordAgainInput;
 
+  // belki daha iyi bir yöntem bulunabilir
   function showErrorScreen(message) {
     setErrorMesage(message);
     setErrorScreenVisible(true);
@@ -54,7 +55,6 @@ export default function Register({ navigation, screenName }) {
         }
       })
       .catch((error) => {
-        // TODO: Hataları düzgün şekilde gösterebilmek
         if (error.code === "auth/email-already-in-use") {
           showErrorScreen("Bu e-posta adresi zaten kullanılıyor!");
           return;

@@ -1,14 +1,16 @@
 import auth from "@react-native-firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import colors from "../../styles/colors";
-import style from "../../styles/style";
-import ImageList from "../ImageList";
 import { getUserLikes } from "../../Datamanager";
+import colors from "../../styles/colors";
+import ImageList from "../ImageList";
 import TabTitle from "../TabTitle";
+import Loading from "../Loading";
 
+// Beğendiklerin sayfası
 export default function Likes({ navigation }) {
   const [userLikes, setUserLikes] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const subscriber = getUserLikes(auth().currentUser.uid).onSnapshot(
@@ -18,11 +20,14 @@ export default function Likes({ navigation }) {
           data[documentSnapshot.id] = documentSnapshot.data();
         });
         setUserLikes(data);
+        setLoading(false);
       }
     );
 
     return subscriber;
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <View style={{ flex: 1 }}>

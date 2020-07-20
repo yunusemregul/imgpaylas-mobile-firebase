@@ -10,6 +10,7 @@ import Settings from "../stacks/Settings";
 
 const Stack = createStackNavigator();
 
+// Stack sayfaları kontrol eden navigator
 export default function StackNavigator() {
   return (
     <Stack.Navigator

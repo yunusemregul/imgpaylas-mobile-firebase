@@ -39,6 +39,12 @@ function getAllImages() {
   return firestore().collection("images").orderBy("timestamp", "desc");
 }
 
+/*
+  kullanıcılar şu anki halde fotoğraf datalarını gidip kendileri düzenliyor 'ben bunu beğendim' şeklinde
+  daha iyi bir yöntem olarak cloud functions denedim ama firebase cloud fonksiyonları çok yavaş
+  1 dakika sürüyor bir kullanıcıyı bir fotoğrafın beğenenlerine eklemek o yüzden şimdilik kullanıcı datayı kendisi düzenliyor
+  bu sorunun firebase ile çözülebileceğini sanmıyorum firebaseden kurtularak çözülür
+*/
 function likeImage(id, likes) {
   getImageDetails(id).update({
     likes: [...likes, auth().currentUser.uid],

@@ -1,15 +1,15 @@
 import auth from "@react-native-firebase/auth";
 import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import { getUserImages } from "../../Datamanager";
 import colors from "../../styles/colors";
-import style from "../../styles/style";
+import CustomButton from "../CustomButton";
 import ImageList from "../ImageList";
+import Loading from "../Loading";
 import Uploading from "../modals/Uploading";
 import ProfileDetails from "../ProfileDetails";
-import Loading from "../Loading";
 import TabTitle from "../TabTitle";
 
 const imagePickerOptions = {
@@ -34,14 +34,14 @@ export default function Profile({ route, navigation }) {
   const [userPostCount, setUserPostCount] = useState(0);
   const [userLikesCount, setUserLikesCount] = useState(0);
   const [userImages, setUserImages] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const uid = route.params ? route.params.uid : auth().currentUser.uid;
   let activeTask;
 
   async function upload() {
     ImagePicker.showImagePicker(imagePickerOptions, async (response) => {
       if (response.didCancel) {
-        console.log("user cancelled uploading");
+        console.log("User cancelled picking an image.");
         return;
       }
       const reference = storage().ref("user/" + uid + "/" + response.fileName);
@@ -69,7 +69,7 @@ export default function Profile({ route, navigation }) {
       setUserLikesCount(totalLikes);
       setUserPostCount(Object.keys(data).length);
       setUserImages(data);
-      setIsLoading(false);
+      setLoading(false);
     });
     return subscriber;
   }, []);
@@ -115,19 +115,17 @@ export default function Profile({ route, navigation }) {
         }}
       />
       {uid == auth().currentUser.uid && (
-        <TouchableOpacity
-          style={{
-            ...style.button,
+        <CustomButton
+          buttonStyle={{
             marginTop: 8,
             width: 312,
             backgroundColor: colors.positive,
             alignSelf: "center",
           }}
-          activeOpacity={1}
           onPress={upload}
         >
-          <Text style={{ color: "white", fontSize: 17 }}>YENİ YÜKLE</Text>
-        </TouchableOpacity>
+          YENİ YÜKLE
+        </CustomButton>
       )}
       {Object.keys(userImages).length == 0 ? (
         <Text

@@ -1,3 +1,4 @@
+start_emulator.bat
 node_modules/**/*
 .expo/*
 npm-debug.*

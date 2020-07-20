@@ -3,6 +3,7 @@ import { Image, Text, View } from "react-native";
 import { getDisplayNameFromUID } from "../Datamanager";
 import colors from "../styles/colors";
 
+// Altlı üstlü text komponenti. Profilde x gönderi y beğeni şeklindeki kısım için
 function TopBottomText(props) {
   return (
     <View style={{ alignItems: "center", ...props.style }}>
@@ -16,6 +17,7 @@ function TopBottomText(props) {
   );
 }
 
+// Profildeki isim avatar beğeni gönderi bölümü
 export default function ProfileDetails({ data }) {
   const [displayName, setDisplayName] = useState("");
 

@@ -10,7 +10,7 @@ import {
 import colors from "../../styles/colors";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
-// TODO: Fotoğraf sahibine fotoğrafı silme yetkisi
+// TODO: Fotoğraf sahibine fotoğrafı silebilme yetkisi
 
 // Bir fotoğrafa tıklandığında büyük halini ve açıklamasını (gönderen, beğeniler) gösteren komponent
 export default function ImageDetails({ route, navigation }) {

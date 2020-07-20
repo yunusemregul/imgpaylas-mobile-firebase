@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import style from "../styles/style";
 
+// Tab sayfalarının başlığı (Keşfet, Beğeniler, Profil)
 export default function TabTitle(props) {
   return (
     <View

@@ -1,10 +1,11 @@
 import auth from "@react-native-firebase/auth";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import TabTitle from "../TabTitle";
-import style from "../../styles/style";
+import { View } from "react-native";
 import colors from "../../styles/colors";
+import CustomButton from "../CustomButton";
+import TabTitle from "../TabTitle";
 
+// Ayarlar sayfası
 export default function Settings({ navigation }) {
   function logOff() {
     auth()
@@ -20,18 +21,17 @@ export default function Settings({ navigation }) {
   return (
     <View>
       <TabTitle title="Ayarlar" />
-      <TouchableOpacity
-        style={{
-          ...style.button,
+
+      <CustomButton
+        buttonStyle={{
           width: 312,
           backgroundColor: colors.negative,
           alignSelf: "center",
         }}
-        activeOpacity={1}
         onPress={logOff}
       >
-        <Text style={{ color: "white", fontSize: 17 }}>ÇIKIŞ YAP</Text>
-      </TouchableOpacity>
+        ÇIKIŞ YAP
+      </CustomButton>
     </View>
   );
 }

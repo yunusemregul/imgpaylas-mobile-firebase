@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { getAllImages } from "../../Datamanager";
 import colors from "../../styles/colors";
-import style from "../../styles/style";
 import ImageList from "../ImageList";
 import TabTitle from "../TabTitle";
+import Loading from "../Loading";
 
+// Keşfet sayfası
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const subscriber = getAllImages().onSnapshot((querySnapshot) => {
@@ -16,9 +18,12 @@ export default function Home({ navigation }) {
         data[documentSnapshot.id] = documentSnapshot.data();
       });
       setImages(data);
+      setLoading(false);
     });
     return subscriber;
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <View style={{ flex: 1 }}>

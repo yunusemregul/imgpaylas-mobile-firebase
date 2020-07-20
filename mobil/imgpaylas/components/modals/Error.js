@@ -1,8 +1,10 @@
 import React from "react";
-import { Modal, Text, View, TouchableOpacity, Image } from "react-native";
-import style from "../../styles/style";
+import { Image, Modal, Text, View } from "react-native";
 import colors from "../../styles/colors";
+import style from "../../styles/style";
+import CustomButton from "../CustomButton";
 
+// Bir hata alındığında kullanıcıya gösterilen popup
 export default function Error(props) {
   return (
     <Modal
@@ -37,18 +39,16 @@ export default function Error(props) {
           >
             {props.children}
           </Text>
-          <TouchableOpacity
-            style={{
-              ...style.button,
+          <CustomButton
+            buttonStyle={{
               marginTop: 9,
               width: 292,
               backgroundColor: colors.negative,
             }}
-            activeOpacity={1}
             onPress={props.onClose}
           >
-            <Text style={{ color: "white", fontSize: 17 }}>TAMAM</Text>
-          </TouchableOpacity>
+            TAMAM
+          </CustomButton>
         </View>
       </View>
     </Modal>
