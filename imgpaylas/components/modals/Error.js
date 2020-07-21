@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Modal, Text, View } from "react-native";
+import { Image, Modal, Text, View, StatusBar } from "react-native";
 import colors from "../../styles/colors";
 import style from "../../styles/style";
 import CustomButton from "../CustomButton";
@@ -51,6 +51,7 @@ export default function Error(props) {
           </CustomButton>
         </View>
       </View>
+      <StatusBar hidden={true} />
     </Modal>
   );
 }

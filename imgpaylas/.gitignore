@@ -1,6 +1,7 @@
 start_emulator.bat
 node_modules/**/*
 .expo/*
+.idea/*
 npm-debug.*
 *.jks
 *.p8
