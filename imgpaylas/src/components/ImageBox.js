@@ -57,8 +57,8 @@ export default function ImageBox(props) {
         <Image
           source={
             props.data.likes.includes(auth().currentUser.uid)
-              ? require("../assets/images/icon_like_liked.png")
-              : require("../assets/images/icon_like.png")
+              ? require("../../assets/images/icon_like_liked.png")
+              : require("../../assets/images/icon_like.png")
           }
           style={{ marginRight: 2, top: 1 }}
         />

@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, Modal, Text, View, StatusBar } from "react-native";
-import colors from "../../styles/colors";
-import style from "../../styles/style";
-import CustomButton from "../CustomButton";
+import colors from "../styles/colors";
+import style from "../styles/style";
+import CustomButton from "../components/CustomButton";
 
 // Bir hata alındığında kullanıcıya gösterilen popup
 export default function Error(props) {

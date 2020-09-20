@@ -1,7 +1,7 @@
 import auth from "@react-native-firebase/auth";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import StackNavigator from "./components/navigators/StackNavigator";
+import StackNavigator from "./navigators/StackNavigator";
 import { getUser } from "./Datamanager";
 
 export default function App() {

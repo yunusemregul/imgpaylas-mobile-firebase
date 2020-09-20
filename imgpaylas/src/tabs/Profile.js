@@ -3,14 +3,14 @@ import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
-import { getUserImages } from "../../Datamanager";
-import colors from "../../styles/colors";
-import CustomButton from "../CustomButton";
-import ImageList from "../ImageList";
-import Loading from "../Loading";
+import { getUserImages } from "../Datamanager";
+import colors from "../styles/colors";
+import CustomButton from "../components/CustomButton";
+import ImageList from "../components/ImageList";
+import Loading from "../components/Loading";
 import Uploading from "../modals/Uploading";
-import ProfileDetails from "../ProfileDetails";
-import TabTitle from "../TabTitle";
+import ProfileDetails from "../components/ProfileDetails";
+import TabTitle from "../components/TabTitle";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",

@@ -1,5 +1,5 @@
 *.bak
-start_emulator.bat
+*.bat
 node_modules/**/*
 .expo/*
 .idea/*

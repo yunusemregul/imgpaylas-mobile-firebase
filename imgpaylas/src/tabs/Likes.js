@@ -1,11 +1,11 @@
 import auth from "@react-native-firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { getUserLikes } from "../../Datamanager";
-import colors from "../../styles/colors";
-import ImageList from "../ImageList";
-import TabTitle from "../TabTitle";
-import Loading from "../Loading";
+import { getUserLikes } from "../Datamanager";
+import colors from "../styles/colors";
+import ImageList from "../components/ImageList";
+import TabTitle from "../components/TabTitle";
+import Loading from "../components/Loading";
 
 // Beğendiklerin sayfası
 export default function Likes({ navigation }) {

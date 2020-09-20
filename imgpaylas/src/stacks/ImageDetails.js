@@ -6,8 +6,8 @@ import {
   getImageDetails,
   likeImage,
   removeLikeFromImage,
-} from "../../Datamanager";
-import colors from "../../styles/colors";
+} from "../Datamanager";
+import colors from "../styles/colors";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
 // TODO: Fotoğraf sahibine fotoğrafı silebilme yetkisi

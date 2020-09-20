@@ -1,9 +1,9 @@
 import React from "react";
 import { Modal, StatusBar, Text, View } from "react-native";
-import colors from "../../styles/colors";
-import style from "../../styles/style";
-import CustomButton from "../CustomButton";
-import ProgressBar from "../ProgressBar";
+import colors from "../styles/colors";
+import style from "../styles/style";
+import CustomButton from "../components/CustomButton";
+import ProgressBar from "../components/ProgressBar";
 
 // Kullanıcı bir fotoğraf yüklerken ne kadarı yüklendiğini vs. gösteren komponent
 export default function Uploading(props) {

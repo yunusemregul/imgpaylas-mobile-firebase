@@ -37,7 +37,7 @@ export default function ProfileDetails({ data }) {
         marginBottom: 10,
       }}
     >
-      <Image source={require("../assets/images/icon_profile_big.png")} />
+      <Image source={require("../../assets/images/icon_profile_big.png")} />
       <View
         style={{
           alignItems: "center",
