@@ -1,14 +1,20 @@
+import auth from "@react-native-firebase/auth";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { default as React, default as React, default as React } from "react";
 import { Image } from "react-native";
-import Home from "../tabs/Home";
-import Likes from "../tabs/Likes";
-import Profile from "../tabs/Profile";
+import ImageDetails from "./screens/stacks/ImageDetails";
+import Login from "./screens/stacks/Login";
+import Register from "./screens/stacks/Register";
+import Settings from "./screens/stacks/Settings";
+import Home from "./screens/tabs/Home";
+import Likes from "./screens/tabs/Likes";
+import Profile from "./screens/tabs/Profile";
 
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Keşfet, Beğeniler, Yüklenenler sayfalarını kontrol eden navigator
-export default function TabNavigator() {
+function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -17,9 +23,9 @@ export default function TabNavigator() {
           let icon;
 
           /* 
-              Böyle yapılması gerekmesi çok kötü
-              https://reactnative.dev/docs/images
-            */
+                Böyle yapılması gerekmesi çok kötü
+                https://reactnative.dev/docs/images
+              */
           switch (routeName) {
             case "home": {
               icon = focused
@@ -50,5 +56,27 @@ export default function TabNavigator() {
       <Tab.Screen name="Likes" component={Likes} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
+  );
+}
+
+export default function Navigation() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName={auth().currentUser != null ? "Home" : "Login"}
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={TabNavigator} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+
+        <Stack.Screen name="Settings" component={Settings} />
+
+        <Stack.Screen name="ImageDetails" component={ImageDetails} />
+        <Stack.Screen name="ProfileDetails" component={Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
