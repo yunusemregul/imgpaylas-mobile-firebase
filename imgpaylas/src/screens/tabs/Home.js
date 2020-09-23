@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import ImageList from "../components/ImageList";
+import Loading from "../components/Loading";
+import TabTitle from "../components/TabTitle";
 import { getAllImages } from "../Datamanager";
 import colors from "../styles/colors";
-import ImageList from "../components/ImageList";
-import TabTitle from "../components/TabTitle";
-import Loading from "../components/Loading";
 
 // Keşfet sayfası
 export default function Home({ navigation }) {

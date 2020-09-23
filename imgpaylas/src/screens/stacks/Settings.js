@@ -1,9 +1,9 @@
 import auth from "@react-native-firebase/auth";
 import React from "react";
 import { View } from "react-native";
-import colors from "../styles/colors";
 import CustomButton from "../components/CustomButton";
 import TabTitle from "../components/TabTitle";
+import colors from "../styles/colors";
 
 // Ayarlar sayfası
 export default function Settings({ navigation }) {
