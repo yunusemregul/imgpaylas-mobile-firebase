@@ -3,14 +3,14 @@ import storage from "@react-native-firebase/storage";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
-import CustomButton from "../components/CustomButton";
-import ImageList from "../components/ImageList";
-import Loading from "../components/Loading";
-import ProfileDetails from "../components/ProfileDetails";
-import TabTitle from "../components/TabTitle";
-import { getUserImages } from "../Datamanager";
-import Uploading from "../modals/Uploading";
-import colors from "../styles/colors";
+import CustomButton from "../../components/CustomButton";
+import ImageList from "../../components/ImageList";
+import Loading from "../../components/Loading";
+import ProfileDetails from "../../components/ProfileDetails";
+import TabTitle from "../../components/TabTitle";
+import { getUserImages } from "../../Datamanager";
+import Uploading from "../../modals/Uploading";
+import colors from "../../styles/colors";
 
 const imagePickerOptions = {
   title: "YÜKLENECEK FOTOĞRAF",
@@ -103,7 +103,7 @@ export default function Profile({ route, navigation }) {
               marginRight: 20,
             }}
           >
-            <Image source={require("../../assets/images/icon_settings.png")} />
+            <Image source={require("../../../assets/images/icon_settings.png")} />
           </TouchableOpacity>
         </TabTitle>
       )}

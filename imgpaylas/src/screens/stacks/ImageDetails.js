@@ -6,8 +6,8 @@ import {
   getImageDetails,
   likeImage,
   removeLikeFromImage,
-} from "../Datamanager";
-import colors from "../styles/colors";
+} from "../../Datamanager";
+import colors from "../../styles/colors";
 
 // TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
 // TODO: Fotoğraf sahibine fotoğrafı silebilme yetkisi
@@ -106,8 +106,8 @@ export default function ImageDetails({ route, navigation }) {
         <Image
           source={
             data.likes.includes(auth().currentUser.uid)
-              ? require("../../assets/images/icon_likes_focused.png")
-              : require("../../assets/images/icon_likes.png")
+              ? require("../../../assets/images/icon_likes_focused.png")
+              : require("../../../assets/images/icon_likes.png")
           }
           style={{
             marginRight: 2,

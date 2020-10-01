@@ -1,7 +1,7 @@
 import auth from "@react-native-firebase/auth";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { default as React, default as React, default as React } from "react";
+import React from "react";
 import { Image } from "react-native";
 import ImageDetails from "./screens/stacks/ImageDetails";
 import Login from "./screens/stacks/Login";
@@ -10,6 +10,7 @@ import Settings from "./screens/stacks/Settings";
 import Home from "./screens/tabs/Home";
 import Likes from "./screens/tabs/Likes";
 import Profile from "./screens/tabs/Profile";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,20 +30,20 @@ function TabNavigator() {
           switch (routeName) {
             case "home": {
               icon = focused
-                ? require("../../assets/images/icon_home_focused.png")
-                : require("../../assets/images/icon_home.png");
+                ? require("../assets/images/icon_home_focused.png")
+                : require("../assets/images/icon_home.png");
               break;
             }
             case "likes": {
               icon = focused
-                ? require("../../assets/images/icon_likes_focused.png")
-                : require("../../assets/images/icon_likes.png");
+                ? require("../assets/images/icon_likes_focused.png")
+                : require("../assets/images/icon_likes.png");
               break;
             }
             case "profile": {
               icon = focused
-                ? require("../../assets/images/icon_profile_focused.png")
-                : require("../../assets/images/icon_profile.png");
+                ? require("../assets/images/icon_profile_focused.png")
+                : require("../assets/images/icon_profile.png");
               break;
             }
           }

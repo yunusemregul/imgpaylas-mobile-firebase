@@ -1,11 +1,11 @@
 import auth from "@react-native-firebase/auth";
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import CustomButton from "../components/CustomButton";
-import Loading from "../components/Loading";
-import Error from "../modals/Error";
-import colors from "../styles/colors";
-import style from "../styles/style";
+import CustomButton from "../../components/CustomButton";
+import Loading from "../../components/Loading";
+import Error from "../../modals/Error";
+import colors from "../../styles/colors";
+import style from "../../styles/style";
 
 // Giriş sayfası
 export default function Login({ navigation, screenName }) {
@@ -63,7 +63,7 @@ export default function Login({ navigation, screenName }) {
         {errorMesage}
       </Error>
       <Image
-        source={require("../../assets/images/logo.png")}
+        source={require("../../../assets/images/logo.png")}
         style={{ width: 214, height: 64 }}
       />
       <TextInput
