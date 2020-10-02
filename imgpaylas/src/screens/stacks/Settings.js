@@ -5,7 +5,7 @@ import CustomButton from "../../components/CustomButton";
 import TabTitle from "../../components/TabTitle";
 import colors from "../../styles/colors";
 
-// Ayarlar sayfası
+// Settings screen
 export default function Settings({ navigation }) {
   function logOff() {
     auth()

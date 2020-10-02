@@ -12,7 +12,7 @@ import { likeImage, removeLikeFromImage } from "../Datamanager";
 import colors from "../styles/colors";
 import style from "../styles/style";
 
-// Tek bir fotoğrafı gösteren komponent
+// Component that shows a single picture
 export default function ImageBox(props) {
   const navigation = useNavigation();
 

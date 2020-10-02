@@ -9,12 +9,12 @@ import {
 } from "../../Datamanager";
 import colors from "../../styles/colors";
 
-// TODO: Date yi okunabilir hale formatlamak şuan sadece toString yapıyorum
-// TODO: Fotoğraf sahibine fotoğrafı silebilme yetkisi
+// TODO: format the date to into a readable form, I just do toString now
+// TODO: allow owners to delete the picture
 
-// Bir fotoğrafa tıklandığında büyük halini ve açıklamasını (gönderen, beğeniler) gösteren komponent
+// A screen that shows the bigger version of image
 export default function ImageDetails({ route, navigation }) {
-  const [data, setData] = useState(route.params.data); // Muhtemelen kötü bir yöntem
+  const [data, setData] = useState(route.params.data); // Probably a bad-practice
   const [creatorName, setCreatorName] = useState("...");
   const [initializing, setInitializing] = useState(true);
 

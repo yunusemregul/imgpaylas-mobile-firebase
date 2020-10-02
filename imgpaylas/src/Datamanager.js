@@ -36,10 +36,12 @@ function getAllImages() {
 }
 
 /*
-  kullanıcılar şu anki halde fotoğraf datalarını gidip kendileri düzenliyor 'ben bunu beğendim' şeklinde
-  daha iyi bir yöntem olarak cloud functions denedim ama firebase cloud fonksiyonları çok yavaş
-  1 dakika sürüyor bir kullanıcıyı bir fotoğrafın beğenenlerine eklemek o yüzden şimdilik kullanıcı datayı kendisi düzenliyor
-  bu sorunun firebase ile çözülebileceğini sanmıyorum firebaseden kurtularak çözülür
+  In current version, users go to the database themselves and edit some images likes themselves. This is such a bad way
+  and creates a big security hole as users are allowed to edit any image in the database as they wish. I thought of a way, found
+  'Firebase Cloud Functions', tried it. It was too slow to process my requests. For example a simple like function took over a minute
+  for the server to add the like to the database. So for now, user edits the database himself to add/remove his like on a image.
+  
+  I think the only way to solve this is to abandon Firebase and switch to my own API which I already made with imgpaylas-web.
 */
 function likeImage(id, likes) {
   getImageDetails(id).update({

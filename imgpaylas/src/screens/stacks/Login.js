@@ -7,7 +7,7 @@ import Error from "../../modals/Error";
 import colors from "../../styles/colors";
 import style from "../../styles/style";
 
-// Giriş sayfası
+// Login screen
 export default function Login({ navigation, screenName }) {
   let passwordInput;
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function Login({ navigation, screenName }) {
   const [errorMesage, setErrorMesage] = useState("");
   const [isLoggingIn, setLoggingIn] = useState(false);
 
-  // belki daha iyi bir yöntem bulunabilir
+  // TODO: maybe theres a better way?
   function showErrorScreen(message) {
     console.log("Login error: " + message);
     setErrorMesage(message);
@@ -42,7 +42,7 @@ export default function Login({ navigation, screenName }) {
         });
       })
       .catch((error) => {
-        showErrorScreen("E-posta ya da şifre hatalı!"); // şimdilik böyle genel bir hata
+        showErrorScreen("E-posta ya da şifre hatalı!");
       });
   }
 

@@ -4,7 +4,7 @@ import { getDisplayNameFromUID } from "../Datamanager";
 import colors from "../styles/colors";
 import style from "../styles/style";
 
-// Altlı üstlü text komponenti. Profilde x gönderi y beğeni şeklindeki kısım için
+// Component for the 'x post' 'y likes' part in profile
 function TopBottomText(props) {
   return (
     <View style={{ alignItems: "center", ...props.style }}>
@@ -18,7 +18,7 @@ function TopBottomText(props) {
   );
 }
 
-// Profildeki isim avatar beğeni gönderi bölümü
+// Component that includes user avatar, name, post count
 export default function ProfileDetails({ data }) {
   const [displayName, setDisplayName] = useState("");
 

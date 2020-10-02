@@ -24,7 +24,7 @@ function TabNavigator() {
           let icon;
 
           /* 
-                Böyle yapılması gerekmesi çok kötü
+                It is bad that it has to be done this way
                 https://reactnative.dev/docs/images
               */
           switch (routeName) {

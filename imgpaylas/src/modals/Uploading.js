@@ -5,7 +5,7 @@ import style from "../styles/style";
 import CustomButton from "../components/CustomButton";
 import ProgressBar from "../components/ProgressBar";
 
-// Kullanıcı bir fotoğraf yüklerken ne kadarı yüklendiğini vs. gösteren komponent
+// Popup for showing how much of an image is uploaded and cancel the upload if wanted
 export default function Uploading(props) {
   return (
     <Modal

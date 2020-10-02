@@ -7,7 +7,6 @@ export default function App() {
   const [user, setUser] = useState();
   const [initializing, setInitializing] = useState(true);
 
-  // kullanıcı bilgileri değiştiğinde (giriş/çıkış)
   function onAuthStateChanged(user) {
     setUser(user);
     if (user != null) {

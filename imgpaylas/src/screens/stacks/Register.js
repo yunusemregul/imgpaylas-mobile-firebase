@@ -5,7 +5,7 @@ import Error from "../../modals/Error";
 import colors from "../../styles/colors";
 import style from "../../styles/style";
 
-// Kayıt sayfası
+// Register screen
 export default function Register({ navigation, screenName }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function Register({ navigation, screenName }) {
 
   let emailInput, passwordInput, passwordAgainInput;
 
-  // belki daha iyi bir yöntem bulunabilir
+  // TODO: maybe theres a better way?
   function showErrorScreen(message) {
     setErrorMesage(message);
     setErrorScreenVisible(true);

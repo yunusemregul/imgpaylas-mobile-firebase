@@ -4,7 +4,7 @@ import colors from "../styles/colors";
 import style from "../styles/style";
 import CustomButton from "../components/CustomButton";
 
-// Bir hata alındığında kullanıcıya gösterilen popup
+// Error popup
 export default function Error(props) {
   return (
     <Modal

@@ -7,7 +7,7 @@ import TabTitle from "../../components/TabTitle";
 import { getUserLikes } from "../../Datamanager";
 import colors from "../../styles/colors";
 
-// Beğendiklerin sayfası
+// Your likes screen
 export default function Likes({ navigation }) {
   const [userLikes, setUserLikes] = useState([]);
   const [isLoading, setLoading] = useState(true);

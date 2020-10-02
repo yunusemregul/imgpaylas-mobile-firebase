@@ -23,10 +23,10 @@ const imagePickerOptions = {
   },
 };
 
-// TODO: fotoğraf timestamp ına a göre sort
-// TODO: activetask.cancel hata veriyor
-// TODO: profil fotoğrafı?
-// TODO: isim değiştirebilme özelliği?
+// TODO: activetask.cancel gives errors
+// TODO: changable profile pics?
+// TODO: changing the name functionality?
+// TODO: scroll the whole page instead of scrolling only the pictures part
 
 export default function Profile({ route, navigation }) {
   const [uploadDialogVisible, setUploadDialogVisible] = useState(false);

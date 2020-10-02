@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import style from "../styles/style";
 import colors from "../styles/colors";
 
-// Yükleniyor ekranı
+// Loading screen
 export default function Loading(props) {
   return (
     <View style={style.container}>

@@ -6,7 +6,7 @@ import TabTitle from "../../components/TabTitle";
 import { getAllImages } from "../../Datamanager";
 import colors from "../../styles/colors";
 
-// Keşfet sayfası
+// Home screen (aka 'discover new pics' screen)
 export default function Home({ navigation }) {
   const [images, setImages] = useState({});
   const [isLoading, setLoading] = useState(true);
