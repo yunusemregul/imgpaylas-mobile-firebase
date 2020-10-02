@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { getDisplayNameFromUID } from "../Datamanager";
 import colors from "../styles/colors";
+import style from "../styles/style";
 
 // Altlı üstlü text komponenti. Profilde x gönderi y beğeni şeklindeki kısım için
 function TopBottomText(props) {
@@ -35,9 +36,22 @@ export default function ProfileDetails({ data }) {
         alignSelf: "center",
         marginTop: 15,
         marginBottom: 10,
+        justifyContent: "center",
+        display: "flex",
       }}
     >
-      <Image source={require("../../assets/images/icon_profile_big.png")} />
+      <View
+        style={{
+          ...style.imagebox,
+          padding: 0,
+          margin: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Image source={require("../../assets/images/icon_profile_big.png")} />
+      </View>
       <View
         style={{
           alignItems: "center",

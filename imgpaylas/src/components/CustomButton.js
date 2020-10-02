@@ -12,7 +12,14 @@ export default function CustomButton(props) {
       activeOpacity={1}
       onPress={props.onPress}
     >
-      <Text style={{ color: "white", fontSize: 17, ...props.textStyle }}>
+      <Text
+        style={{
+          color: "white",
+          alignSelf: "center",
+          fontSize: 17,
+          ...props.textStyle,
+        }}
+      >
         {props.children}
       </Text>
     </TouchableOpacity>

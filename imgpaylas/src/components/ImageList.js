@@ -16,7 +16,7 @@ export default function ImageList(props) {
       }}
       numColumns={3}
       keyExtractor={(item) => item}
-      style={{ alignSelf: "center", marginTop: 8 }}
+      style={{ alignSelf: "center", paddingTop: 8 }}
     />
   );
 }

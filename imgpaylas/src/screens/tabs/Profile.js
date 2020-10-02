@@ -103,7 +103,9 @@ export default function Profile({ route, navigation }) {
               marginRight: 20,
             }}
           >
-            <Image source={require("../../../assets/images/icon_settings.png")} />
+            <Image
+              source={require("../../../assets/images/icon_settings.png")}
+            />
           </TouchableOpacity>
         </TabTitle>
       )}

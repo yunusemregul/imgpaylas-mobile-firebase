@@ -106,32 +106,16 @@ export default function Login({ navigation, screenName }) {
         Şifremi Unuttum
       </Text>
       <View style={{ position: "absolute", bottom: 32, alignItems: "center" }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View
-            style={{
-              flex: 1,
-              borderBottomColor: colors.primary,
-              borderBottomWidth: 1,
-            }}
-          />
-          <Text
-            style={{
-              flex: 1,
-              fontSize: 17,
-              color: colors.primary,
-              textAlign: "center",
-            }}
-          >
-            ya da
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              borderBottomColor: colors.primary,
-              borderBottomWidth: 1,
-            }}
-          />
-        </View>
+        <Text
+          style={{
+            flex: 1,
+            fontSize: 17,
+            color: colors.primary,
+            textAlign: "center",
+          }}
+        >
+          ya da
+        </Text>
         <TouchableOpacity
           title="Kayıt Ol"
           style={{ ...style.button, backgroundColor: colors.important }}

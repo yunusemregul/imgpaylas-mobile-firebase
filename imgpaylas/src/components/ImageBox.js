@@ -20,6 +20,7 @@ export default function ImageBox(props) {
     <View style={style.imagebox}>
       <TouchableHighlight
         onPress={() => {
+          console.log(props.data);
           navigation.push("ImageDetails", {
             data: props.data,
             id: props.id,
