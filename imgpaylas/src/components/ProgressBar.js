@@ -9,8 +9,15 @@ export default function ProgressBar(props) {
   return (
     <View
       style={{
-        borderWidth: 1,
-        borderColor: colors.primary,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 2,
+          height: 8,
+        },
+        shadowOpacity: 0.6,
+        shadowRadius: 16.0,
+        elevation: 16,
+        borderRadius: 2,
         width: width,
         height: 40,
       }}
@@ -20,6 +27,7 @@ export default function ProgressBar(props) {
           backgroundColor: colors.important,
           width: (props.progress / 100) * (width - 2),
           height: 38,
+          borderRadius: 2,
         }}
       ></View>
       <Text

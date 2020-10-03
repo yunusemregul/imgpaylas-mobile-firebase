@@ -16,8 +16,15 @@ export default StyleSheet.create({
   },
   outlinedWhiteContainer: {
     backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.primary,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 2,
+      height: 8,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 16.0,
+    elevation: 16,
+    borderRadius: 2,
     padding: 12,
   },
   textinput: {
